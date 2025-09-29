@@ -1,4 +1,4 @@
-![QCM](Hikari.png)
+![QCM](HIKARI.gif)
 
 # QCM
 **Mp0 TermD**
