@@ -11,8 +11,8 @@ Un QCM
 
 - **QCM**
 - **GUI**
--**Saisies infos**
--**Affichage correction**
+- **Saisies infos**
+- **Affichage correction**
 
 ![Hum](Hikari-gif.webp)
 
