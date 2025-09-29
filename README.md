@@ -12,6 +12,8 @@ Un QCM
 - **QCM**
 - **GUI**
 
+![Hum](Hikari-gif.webp)
+
 ## 🚀 Infos
 
 ### Basiques
