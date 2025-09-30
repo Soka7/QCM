@@ -13,6 +13,9 @@ Un QCM
 - **GUI**
 - **Saisies infos**
 - **Affichage correction**
+- **Modulariser**
+- **Requirements**
+- **Tests unitaires**
 
 ![Hum](Hikari-gif.webp)
 
