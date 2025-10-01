@@ -3,7 +3,9 @@ from tkinter import ttk, messagebox
 from tkinter import Tk, Label
 import random
 from PIL import Image, ImageTk
-from CorrectAnswerDisplayer import show_answer
+from Extracted_QNA import correct_answer_list
+
+print(correct_answer_list)
 
 ToggleEvents = False
 def Toggle():
@@ -56,7 +58,7 @@ def Transit(ToggleEvents):
     if Destroyed == 0:
         Page.destroy()
     Destroyed = 1
-    BonnesReponses = ["c", "a", "a", "c", "c", "b", "b", "b", "a", "b"]
+    BonnesReponses = correct_answer_list
     Reponses = []
     NmPage = 1
     Fini = False
@@ -129,11 +131,11 @@ class CreerPageCustom:
         
         Titr = tk.Label(Fram, text=self.Tit, bg = "Black", fg="Green")
         Titr.grid(column=0, row=0)
-        Choix1 = tk.Button(Fram, text=self.C1, bg = "Black", fg="Green", command=lambda:self.AutoDestruct("a"))
+        Choix1 = tk.Button(Fram, text=self.C1, bg = "Black", fg="Green", command=lambda:self.AutoDestruct(1))
         Choix1.grid(column=0, row=1)
-        Choix2 = tk.Button(Fram, text=self.C2, bg = "Black", fg="Green", command=lambda:self.AutoDestruct("b"))
+        Choix2 = tk.Button(Fram, text=self.C2, bg = "Black", fg="Green", command=lambda:self.AutoDestruct(2))
         Choix2.grid(column=0, row=2)
-        Choix3 = tk.Button(Fram, text=self.C3, bg = "Black", fg="Green", command=lambda:self.AutoDestruct("c"))
+        Choix3 = tk.Button(Fram, text=self.C3, bg = "Black", fg="Green", command=lambda:self.AutoDestruct(3))
         Choix3.grid(column=0, row=3)
         
         Image_ = Image.open("OIP.jpeg")
