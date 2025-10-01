@@ -3,6 +3,7 @@ from tkinter import ttk, messagebox
 from tkinter import Tk, Label
 import random
 from PIL import Image, ImageTk
+from CorrectAnswerDisplayer import correct_answer_list, show_answer
 
 def Home():
     global Bonus
@@ -20,7 +21,7 @@ def Home():
     Presentation.grid(column=0, row=2)
     global Destroyed
     Destroyed = 0
-    Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=lambda:Transit())
+    Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=Transit)
     Start.grid(column=0, row=3)
     
     Page.mainloop()
@@ -107,8 +108,8 @@ def Transit():
 class CreerPageCustom:
     
     def __init__(self, Tit, C1, C2, C3):
-        self.Tit = Tit
-        self.C1 = C1
+        self.Tit = Tit #Titre
+        self.C1 = C1 #Choix 1, 2, 3
         self.C2 = C2
         self.C3 = C3
         
@@ -120,14 +121,14 @@ class CreerPageCustom:
         
         Titr = tk.Label(Fram, text=self.Tit, bg = "Black", fg="Green")
         Titr.grid(column=0, row=0)
-        Choix1 = tk.Button(Fram, text=self.C1, bg = "Black", fg="Green", command=lambda:self.AutoDestruct1())
+        Choix1 = tk.Button(Fram, text=self.C1, bg = "Black", fg="Green", command=lambda:self.AutoDestruct("a"))
         Choix1.grid(column=0, row=1)
-        Choix2 = tk.Button(Fram, text=self.C2, bg = "Black", fg="Green", command=lambda:self.AutoDestruct2())
+        Choix2 = tk.Button(Fram, text=self.C2, bg = "Black", fg="Green", command=lambda:self.AutoDestruct("b"))
         Choix2.grid(column=0, row=2)
-        Choix3 = tk.Button(Fram, text=self.C3, bg = "Black", fg="Green", command=lambda:self.AutoDestruct3())
+        Choix3 = tk.Button(Fram, text=self.C3, bg = "Black", fg="Green", command=lambda:self.AutoDestruct("c"))
         Choix3.grid(column=0, row=3)
         
-        Image_ = Image.open(r"OIP.jpeg")
+        Image_ = Image.open("OIP.jpeg")
         Image_ = Image_.resize((100, 100))
         Image_ = ImageTk.PhotoImage(Image_)
         Img = tk.Label(Fram, image=Image_, bg = "Black", fg="Green")
@@ -135,20 +136,8 @@ class CreerPageCustom:
     
         Pag.mainloop()
         
-    def AutoDestruct1(self):
-        Reponses.append("a")
-        global NmPage
-        NmPage += 1
-        Pag.destroy()
-
-    def AutoDestruct2(self):
-        Reponses.append("b")
-        global NmPage
-        NmPage += 1
-        Pag.destroy()
-        
-    def AutoDestruct3(self):
-        Reponses.append("c")
+    def AutoDestruct(self, ReponseAAjouter):
+        Reponses.append(ReponseAAjouter)
         global NmPage
         NmPage += 1
         Pag.destroy()
