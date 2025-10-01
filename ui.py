@@ -1,10 +1,10 @@
 from tkinter import *
 import tkinter as tk
 
+from Extracted_QNA import correct_answer_list
 from question_checker import check_q
 from question_displayer import display_q
 from CorrectAnswerDisplayer import show_answer
-from CorrectAnswerDisplayer import correct_answer_list
 from Score_handler import Score
 
 class Ui():
@@ -120,8 +120,6 @@ class Ui():
         self.a1_display["state"] = "normal"
         self.a2_display["state"] = "normal"
         self.a3_display["state"] = "normal"
-
-        print(self.answers)
 
         return None
 
