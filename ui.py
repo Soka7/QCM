@@ -8,10 +8,15 @@ from CorrectAnswerDisplayer import show_answer
 from Score_handler import Score
 
 class qcm_display():
-    def __init__(self, starting_q : int, ending_q : int):
+    def __init__(self, root, starting_q : int, ending_q : int):
+        """
+        Take the first and last question of the QCM in arguments.
+        """
 
         assert type(starting_q) == int, "The index must be an integer."
         assert type(ending_q) == int, "The index must be an integer."
+
+        self.root = root
 
         self.q_current : float = starting_q
         self.starting_q : int = starting_q
@@ -21,21 +26,14 @@ class qcm_display():
         self.score = Score()
         self.answers : list = correct_answer_list
 
-        self.root = tk.Tk()
-        self.root.title("Multiple Choice Questions")
-        self.root.geometry("800x400")
-        self.root.config(background = "Black")
+        self.q_display = Label(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White")
+        self.a1_display = Button(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White", command = lambda : self._next_question(1), state = "normal")
+        self.a2_display = Button(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White", command = lambda : self._next_question(2), state = "normal")
+        self.a3_display = Button(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White", command = lambda : self._next_question(3), state = "normal")
+        self.ca_display = Label(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White")
+        self.s_display = Label(self.root, text = "", font = ("Comic Sans MS", 24), background = "Black", foreground = "White")
 
-        self.q_display = Label(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White")
-        self.a1_display = Button(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White", command = lambda : self.next_question(1), state = "normal")
-        self.a2_display = Button(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White", command = lambda : self.next_question(2), state = "normal")
-        self.a3_display = Button(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White", command = lambda : self.next_question(3), state = "normal")
-        self.ca_display = Label(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White")
-        self.s_display = Label(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White")
-    
-    # The 3 following functions do the same thing, just each one is used fo its appropriate button.
-
-    def button_disabler(self) -> None:
+    def _button_disabler(self) -> None:
         """
         Disable the buttons.
         """
@@ -46,7 +44,7 @@ class qcm_display():
 
         return None
 
-    def next_question(self, answer : int) -> None:
+    def _next_question(self, answer : int) -> None:
         """
         Show the answer of the question and move to the next one.
         Wait 0.8 second.
@@ -62,19 +60,19 @@ class qcm_display():
 
         self.ca_display["text"] += self.to_display[show_answer(self.q_current)]
 
-        self.button_disabler()
+        self._button_disabler()
 
-        self.ca_display.after(800, self.move_to_next_question)
+        self.ca_display.after(800, self._move_to_next_question)
 
         return None
     
-    def move_to_next_question(self) -> None:
+    def _move_to_next_question(self) -> None:
         """
         Move to the next question and erase the answer.
         """
         # Idea to separate the function by ChatGPT
 
-        self.update_question()
+        self._update_question()
         self.ca_display["text"] = ""
 
         self.a1_display["state"] = "normal"
@@ -84,14 +82,14 @@ class qcm_display():
         return None
 
 
-    def update_question(self) -> None:
+    def _update_question(self) -> None:
         """
         Update the question displayed.
         """
         if self.q_current == self.ending_q:
-            self.end_screen()
+            self._end_screen()
             return None
-
+        
         self.q_current += 1
 
         self.to_display : list = display_q(self.q_current)
@@ -104,7 +102,7 @@ class qcm_display():
 
         return None
 
-    def end_screen(self) -> None:
+    def _end_screen(self) -> None:
         """
         Create and show the ending srceen.
         """
@@ -130,35 +128,34 @@ class qcm_display():
         else:
             comment = "\n Vous avez eu un score parfait, Chuck Norris vous en félicite."
 
-        end_display = Label(self.root, text = "Vous venez d'atteindre la fin de ce QCM." + comment, font = ("Comic Sans MS", 16), background = "Black", foreground = "White")
-        end_display.place(x = 380, y = 80, anchor = "center")
+        end_display = Label(self.root, text = "Vous venez d'atteindre la fin de ce QCM." + comment, font = ("Comic Sans MS", 22), background = "Black", foreground = "White")
+        end_display.place(relx = 0.5, rely = 0.4, anchor = "center")
 
         self.s_display["text"] = str(self.score.score) + " sur " + str(self.score.max_score)
-        self.s_display.place(x = 380, y = 145, anchor = "center")
+        self.s_display.place(relx = 0.5, rely = 0.5, anchor = "center")
 
-        correct_answers_display = Label(self.root, text = "Les bonnes réponses étaient: \n" + str(self.answers), font = ("Comic Sans MS", 16), background = "Black", foreground = "White")
-        correct_answers_display.place(x = 380, y = 200, anchor = "center")
+        # Add 1 to both because otherwise the last element isn't show and if the start is -1 which is the right start, it will be 0 and not the last element.
+        correct_answers_display = Label(self.root, text = "Les bonnes réponses étaient: \n" + str(self.answers[self.starting_q + 1 : self.ending_q + 1]), font = ("Comic Sans MS", 20), background = "Black", foreground = "White")
+        correct_answers_display.place(relx = 0.5, rely = 0.6, anchor = "center")
         return None
 
-    def _launch(self) -> None :
+    def launch(self) -> None :
         """
         Ask for teh first and last question.
         Create the UI and start the Multiple Choice Questions.
         """
 
-        self.update_question()
+        self._update_question()
 
-        self.q_display.place(x = 100, y = 0)
-        self.a1_display.place(x = 160, y = 50)
-        self.a2_display.place(x = 160, y = 100)
-        self.a3_display.place(x = 160, y = 150)
-        self.ca_display.place(x = 100, y = 200)
-        self.s_display.place(x = 300, y = 300)
+        self.q_display.place(relx = 0.5, y = 50, anchor = "center")
+        self.a1_display.place(relx = 0.1, y = 100, anchor = "nw")
+        self.a2_display.place(relx = 0.1, y = 200, anchor = "nw")
+        self.a3_display.place(relx = 0.1, y = 300, anchor = "nw")
+        self.ca_display.place(relx = 0.5, y = 525, anchor = "center")
+        self.s_display.place(relx = 0.5, y = 450, anchor = "center")
 
         self.root.mainloop()
 
         return None
 
 # La premiere question commence a -1 et la derniere a nombre de question - 1
-p = qcm_display(-1, 9)
-p._launch()
