@@ -3,9 +3,14 @@ from tkinter import ttk, messagebox
 from tkinter import Tk, Label
 import random
 from PIL import Image, ImageTk
-from CorrectAnswerDisplayer import correct_answer_list, show_answer
+from CorrectAnswerDisplayer import show_answer
 
-def Home():
+ToggleEvents = False
+def Toggle():
+    global ToggleEvents
+    ToggleEvents = True
+
+def Home(ToggleEvents):
     global Bonus
     Bonus = 0
     global Page
@@ -21,7 +26,9 @@ def Home():
     Presentation.grid(column=0, row=2)
     global Destroyed
     Destroyed = 0
-    Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=Transit)
+    Evts = tk.Button(Frame, text="Toggle Events", bg = "Black", fg="Green", command=Toggle)
+    Evts.grid(column=0, row=4)
+    Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=lambda: Transit(ToggleEvents))
     Start.grid(column=0, row=3)
     
     Page.mainloop()
@@ -33,7 +40,7 @@ def Event():
     if Nmbr == 1:
         Message1 = messagebox.showinfo("Pile", "RECOMMENCEZ LE QCM !")
         Fini = True
-        Transit()
+        Transit(ToggleEvents)
     elif Nmbr == 2:
         Message2 = messagebox.showinfo("Face", "+1 !")
         global Bonus
@@ -43,7 +50,7 @@ def Event():
         Fini = True
         NmPage = None
     
-def Transit():
+def Transit(ToggleEvents):
     global Fini, BonnesReponses, Reponses, NmPage, Destroyed
     NumEvent = random.randint(-5,10)
     if Destroyed == 0:
@@ -55,7 +62,8 @@ def Transit():
     Fini = False
     while Fini != True:
         if NumEvent == NmPage:
-            Event()
+            if ToggleEvents == True:
+                Event()
         match NmPage:
             case 1:
                 Page1 = CreerPageCustom("Qui est le plus fort, Saitama, Antispiral ou Chuck Norris ?","Saitama","Antispiral","Chuck Norris")
@@ -159,8 +167,8 @@ def Score():
     
     def Rej():
         Pag_.destroy()
-        Transit()
+        Transit(ToggleEvents)
     
     Rejouer = tk.Button(Fram_, text="Rejouer ?", bg = "Black", fg="Green", command=lambda:Rej())
     Rejouer.grid(column=0, row=1)
-Home()
+Home(ToggleEvents)
