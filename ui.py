@@ -27,9 +27,12 @@ class qcm_display():
         self.answers : list = correct_answer_list
 
         self.q_display = Label(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White")
-        self.a1_display = Button(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White", command = lambda : self._next_question(1), state = "normal")
-        self.a2_display = Button(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White", command = lambda : self._next_question(2), state = "normal")
-        self.a3_display = Button(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White", command = lambda : self._next_question(3), state = "normal")
+        self.a1_display = Button(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", borderwidth = 0,
+                                 activebackground = "Black", foreground = "White", command = lambda : self._next_question(1), state = "normal")
+        self.a2_display = Button(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", borderwidth = 0,
+                                 activebackground = "Black", foreground = "White", command = lambda : self._next_question(2), state = "normal")
+        self.a3_display = Button(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", borderwidth = 0,
+                                 activebackground = "Black", foreground = "White", command = lambda : self._next_question(3), state = "normal")
         self.ca_display = Label(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White")
         self.s_display = Label(self.root, text = "", font = ("Comic Sans MS", 24), background = "Black", foreground = "White")
 
@@ -128,14 +131,16 @@ class qcm_display():
         else:
             comment = "\n Vous avez eu un score parfait, Chuck Norris vous en félicite."
 
-        end_display = Label(self.root, text = "Vous venez d'atteindre la fin de ce QCM." + comment, font = ("Comic Sans MS", 22), background = "Black", foreground = "White")
+        end_display = Label(self.root, text = "Vous venez d'atteindre la fin de ce QCM." + comment, font = ("Comic Sans MS", 22),
+                            background = "Black", foreground = "White")
         end_display.place(relx = 0.5, rely = 0.4, anchor = "center")
 
         self.s_display["text"] = str(self.score.score) + " sur " + str(self.score.max_score)
-        self.s_display.place(relx = 0.5, rely = 0.5, anchor = "center")
+        self.s_display.place(relx = 0.5, rely = -0.1, anchor = "center")
 
         # Add 1 to both because otherwise the last element isn't show and if the start is -1 which is the right start, it will be 0 and not the last element.
-        correct_answers_display = Label(self.root, text = "Les bonnes réponses étaient: \n" + str(self.answers[self.starting_q + 1 : self.ending_q + 1]), font = ("Comic Sans MS", 20), background = "Black", foreground = "White")
+        correct_answers_display = Label(self.root, text = "Les bonnes réponses étaient: \n" + str(self.answers[self.starting_q + 1 : self.ending_q + 1]),
+                                        font = ("Comic Sans MS", 20), background = "Black", foreground = "White")
         correct_answers_display.place(relx = 0.5, rely = 0.6, anchor = "center")
         return None
 
