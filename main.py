@@ -3,9 +3,13 @@ from tkinter import ttk, messagebox
 from tkinter import Tk, Label
 import random
 from PIL import Image, ImageTk
-from CorrectAnswerDisplayer import correct_answer_list, show_answer
+from CorrectAnswerDisplayer import show_answer
 
-def Home():
+ToggleEvents = False
+def Toggle(ToggleEvents):
+    ToggleEvents = True
+
+def Home(ToggleEvents):
     global Bonus
     Bonus = 0
     global Page
@@ -21,6 +25,8 @@ def Home():
     Presentation.grid(column=0, row=2)
     global Destroyed
     Destroyed = 0
+    Evts = tk.Button(Frame, text="Toggle Events", bg = "Black", fg="Green", command=lambda: Toggle(ToggleEvents))
+    Evts.grid(column=0, row=4)
     Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=Transit)
     Start.grid(column=0, row=3)
     
@@ -163,4 +169,4 @@ def Score():
     
     Rejouer = tk.Button(Fram_, text="Rejouer ?", bg = "Black", fg="Green", command=lambda:Rej())
     Rejouer.grid(column=0, row=1)
-Home()
+Home(ToggleEvents)
