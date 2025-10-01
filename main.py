@@ -133,10 +133,28 @@ def Score():
     Titr_ = tk.Label(Fram_, text=f"Votre score ! : {Score_}   ||  Et la correction: {BonnesReponses}", bg = "Black", fg="Red")
     Titr_.grid(column=0, row=0)
     
+    ######################################################## Yolked
+    if Score_/len(BonnesReponses) <= 0.1:
+        comment = "\n Vous etes lamentable, insecte. "
+
+    elif Score_/len(BonnesReponses) < 0.5:
+        comment = "\n Vous etes faible, miserable etre humain. "
+
+    elif Score_/len(BonnesReponses) < 0.7:
+        comment = "\n Vous avez eu un score passable. "
+    elif Score_/len(BonnesReponses) < 1:
+        comment = "\n Vous avez eu un score remarquable ! "
+    else:
+        comment = "\n Vous avez eu un score parfait, Chuck Norris est tres fier de vous. Good boy."
+    ######################################################## Yolked
+    
+    Comm = tk.Label(Fram_, text=comment, bg = "Black", fg="Red")
+    Comm.grid(column=0, row=1)
+    
     def Rej():
         Pag_.destroy()
         Transit(ToggleEvents)
     
-    Rejouer = tk.Button(Fram_, text="Rejouer ?", bg = "Black", fg="Green", command=lambda:Rej())
-    Rejouer.grid(column=0, row=1)
+    Rejouer = tk.Button(Fram_, text="Rejouer ?", bg = "Black", fg="Green", command=Rej)
+    Rejouer.grid(column=0, row=2)
 Home(ToggleEvents)
