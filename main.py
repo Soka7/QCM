@@ -72,6 +72,10 @@ def CallPage(NmPage, NumEvent):
     if NmPage == 10:
         Score()
     else:
+        #display_q(NmPage)[0] Question
+        #display_q(NmPage)[1] Choix
+        #display_q(NmPage)[2]
+        #display_q(NmPage)[3]
         Page1 = CreerPageCustom(display_q(NmPage)[0],display_q(NmPage)[1],display_q(NmPage)[2],display_q(NmPage)[3], NumEvent)
         Page1.CreerPage()
 
