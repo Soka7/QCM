@@ -4,6 +4,7 @@ import tkinter as tk
 from question_checker import check_q
 from question_displayer import display_q
 from CorrectAnswerDisplayer import show_answer
+from CorrectAnswerDisplayer import correct_answer_list
 from Score_handler import Score
 
 class Ui():
@@ -11,6 +12,7 @@ class Ui():
         self.q_current : float = -1
         self.to_display : list = []
         self.score = Score()
+        self.answers : list = correct_answer_list
 
         self.root = tk.Tk()
         self.root.title("Multiple Choice Questions")
@@ -18,13 +20,24 @@ class Ui():
         self.root.config(background = "Black")
 
         self.q_display = Label(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White")
-        self.a1_display = Button(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White", command = self.next_question1)
-        self.a2_display = Button(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White", command = self.next_question2)
-        self.a3_display = Button(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White", command = self.next_question3)
+        self.a1_display = Button(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White", command = self.next_question1, state = "normal")
+        self.a2_display = Button(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White", command = self.next_question2, state = "normal")
+        self.a3_display = Button(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White", command = self.next_question3, state = "normal")
         self.ca_display = Label(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White")
         self.s_display = Label(self.root, text = "", font = ("Comic Sans MS", 16), background = "Black", foreground = "White")
     
     # The 3 following functions do the same thing, just each one is used fo its appropriate button.
+
+    def button_disabler(self) -> None:
+        """
+        Disable the buttons.
+        """
+        # Source from Stack Overflow
+        self.a1_display["state"] = "disabled"
+        self.a2_display["state"] = "disabled"
+        self.a3_display["state"] = "disabled"
+
+        return None
 
     def next_question1(self) -> None:
         """
@@ -42,6 +55,9 @@ class Ui():
             self.score.update_score(False)
 
         self.ca_display["text"] += self.to_display[show_answer(self.q_current)]
+
+        self.button_disabler()
+
         self.ca_display.after(800, self.move_to_next_question)
 
         return None
@@ -61,7 +77,10 @@ class Ui():
             self.ca_display["text"] = "Mauvaise réponse ! "
             self.score.update_score(False)
 
+        self.button_disabler()
+
         self.ca_display["text"] += self.to_display[show_answer(self.q_current)]
+
         self.ca_display.after(800, self.move_to_next_question)
 
         return None
@@ -81,7 +100,10 @@ class Ui():
             self.ca_display["text"] = "Mauvaise réponse ! "
             self.score.update_score(False)
 
+        self.button_disabler()
+
         self.ca_display["text"] += self.to_display[show_answer(self.q_current)]
+
         self.ca_display.after(800, self.move_to_next_question)
 
         return None
@@ -94,6 +116,12 @@ class Ui():
 
         self.update_question()
         self.ca_display["text"] = ""
+
+        self.a1_display["state"] = "normal"
+        self.a2_display["state"] = "normal"
+        self.a3_display["state"] = "normal"
+
+        print(self.answers)
 
         return None
 

@@ -16,4 +16,3 @@ def check_q(question_index : int, answer : int) -> bool:
         return True
     else:
         return False
-    
