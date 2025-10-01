@@ -72,11 +72,7 @@ def CallPage(NmPage, NumEvent):
     if NmPage == 10:
         Score()
     else:
-        Ques = display_q(NmPage)[0]
-        Rep1 = display_q(NmPage)[1]
-        Rep2 = display_q(NmPage)[2]
-        Rep3 = display_q(NmPage)[3]
-        Page1 = CreerPageCustom(Ques,Rep1,Rep2,Rep3, NumEvent)
+        Page1 = CreerPageCustom(display_q(NmPage)[0],display_q(NmPage)[1],display_q(NmPage)[2],display_q(NmPage)[3], NumEvent)
         Page1.CreerPage()
 
 class CreerPageCustom:
@@ -116,7 +112,7 @@ class CreerPageCustom:
         global NmPage
         NmPage += 1
         Pag.destroy()
-        CallPage(NmPage, self.NumEvent)
+        CallPage(NmPage, self.NumEvent) #Ici on a de la recursivité.
     
 def Score():
     Score_ = 0
