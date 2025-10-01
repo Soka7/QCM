@@ -4,6 +4,7 @@ from tkinter import Tk, Label
 import random
 from PIL import Image, ImageTk
 from Extracted_QNA import correct_answer_list
+from question_displayer import display_q
 
 print(correct_answer_list)
 
@@ -60,68 +61,32 @@ def Transit(ToggleEvents):
     Destroyed = 1
     BonnesReponses = correct_answer_list
     Reponses = []
-    NmPage = 1
-    Fini = False
-    while Fini != True:
-        if NumEvent == NmPage:
-            if ToggleEvents == True:
-                Event()
-        match NmPage:
-            case 1:
-                Page1 = CreerPageCustom("Qui est le plus fort, Saitama, Antispiral ou Chuck Norris ?","Saitama","Antispiral","Chuck Norris")
-                Page1.CreerPage()
-            case 2:
-                Page2 = CreerPageCustom("Depuis quand le latin est une langue morte ?", "CN a eu 0","Depuis que les poules ont des dents","???")
-                Page2.CreerPage()
-            case 3:
-                Page3 = CreerPageCustom("Chuck peut-il marcher sur l'eau ?", "Oui","Non","Ptet ben qu'oui ptet ben qu'non")
-                Page3.CreerPage()
-            case 4:
-                Page4 = CreerPageCustom("Que fait Chuck Norris tous les matins ?", "Rien","Il boit sa Heineken reconnaissable a son etoile dans tt la France","Il prouve l'existence de l'anti-matiere dans la 4ieme diemension")
-                Page4.CreerPage()
-            case 5:
-                Page5 = CreerPageCustom("En quoi Hulk se transforme-t-il quand il se met en colere ?", "Bruce Wayne","Franck Leboeuf","Chuck Norris")
-                Page5.CreerPage()
-            case 6:
-                Page6 = CreerPageCustom("Quelle est la couleur du cheval blanc de Chuck Norris ?", "Noir", "Blanc", "Rouge")
-                Page6.CreerPage()
-            case 7:
-                Page7 = CreerPageCustom(
-                    "Quel est le nom de la discipline d'arts martiaux que Chuck Norris a créée ?",
-                    "Tang Soo Do",
-                    "Chun Kuk Do",
-                    "Karate Shotokan")
-                Page7.CreerPage()
-
-            case 8:
-                Page8 = CreerPageCustom(
-                    "Dans quel film Chuck Norris a-t-il affronté Bruce Lee ?",
-                    "Opération Dragon",
-                    "Le Retour du Dragon",
-                    "Le Dernier Combat")
-                Page8.CreerPage()
-
-            case 9:
-                Page9 = CreerPageCustom(
-                    "Quel est le nom du personnage interprété par Chuck Norris dans la série 'Walker, Texas Ranger' ?",
-                    "Cordell Walker",
-                    "John T. Booker",
-                    "Jack McCallister")
-                Page9.CreerPage()
-            case 10:
-                Page10 = CreerPageCustom("Quel est le sport préféré de Chuck Norris ?", "Tennis", "Karate", "Dompter des lions")
-                Page10.CreerPage()
-            case 11:
-                Score()
-                Fini = True
+    NmPage = 0
+    CallPage(NmPage, NumEvent)
+                
+def CallPage(NmPage, NumEvent):
+    
+    if NumEvent == NmPage:
+        if ToggleEvents == True:
+            Event()
+    if NmPage == 10:
+        Score()
+    else:
+        Ques = display_q(NmPage)[0]
+        Rep1 = display_q(NmPage)[1]
+        Rep2 = display_q(NmPage)[2]
+        Rep3 = display_q(NmPage)[3]
+        Page1 = CreerPageCustom(Ques,Rep1,Rep2,Rep3, NumEvent)
+        Page1.CreerPage()
 
 class CreerPageCustom:
     
-    def __init__(self, Tit, C1, C2, C3):
+    def __init__(self, Tit, C1, C2, C3, NumEvent):
         self.Tit = Tit #Titre
         self.C1 = C1 #Choix 1, 2, 3
         self.C2 = C2
         self.C3 = C3
+        self.NumEvent = NumEvent
         
     def CreerPage(self):
         global Pag
@@ -151,6 +116,7 @@ class CreerPageCustom:
         global NmPage
         NmPage += 1
         Pag.destroy()
+        CallPage(NmPage, self.NumEvent)
     
 def Score():
     Score_ = 0
