@@ -26,7 +26,7 @@ class Main_Menu():
         self.root.config(background = "Black")
 
         self.start_button = Button(self.root, text = "Commencer ?", font = ("Comic Sans MS", 24), borderwidth = 0, background = "Black",
-                                    activebackground = "Black", foreground = "White", command = lambda : self._start_qcm(0, 1))
+                                    activebackground = "Black", foreground = "White", command = lambda : self._start_qcm(0, 9))
         self.setting_button = Button(self.root, text = "Paramètres", font = ("Comic Sans Ms", 24), borderwidth = 0, background = "Black",
                                     activebackground = "Black", foreground = "White", command = self._show_settings)
         self.quit_button = Button(self.root, text = "Quitter", font = ("Comic Sans MS", 24), borderwidth = 0, background = "Black",
@@ -87,15 +87,22 @@ class Main_Menu():
 
         return None
     
-    def start_game(self) -> None:
+    def _create_main_menu(self) -> None:
         """
-        Start the game.
+        Place the main menu
         """
 
         self.start_button.place(x = 480, y = 410)
         self.setting_button.place(x = 480, y = 510)
         self.quit_button.place(x = 480, y = 610)
 
+        return None
+
+    def start_game(self) -> None:
+        """
+        Start the game.
+        """
+        self._create_main_menu()
         self.root.mainloop()
         return None
 

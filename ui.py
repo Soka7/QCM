@@ -2,7 +2,6 @@ from tkinter import *
 import tkinter as tk
 
 from Extracted_QNA import correct_answer_list
-from question_checker import check_q
 from question_displayer import display_q
 from CorrectAnswerDisplayer import show_answer
 from Score_handler import Score
@@ -54,7 +53,7 @@ class qcm_display():
         """
         assert type(answer) == int, "The answer must be an integer."
 
-        if check_q(self.q_current, answer):
+        if answer == self.answers[self.q_current]:
             self.ca_display["text"] = "Bonne réponse : "
             self.score.update_score(True)
         else:
