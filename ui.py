@@ -7,10 +7,12 @@ from CorrectAnswerDisplayer import show_answer
 from Score_handler import Score
 
 class qcm_display():
-    def __init__(self, root, starting_q : int, ending_q : int):
+    def __init__(self, root, starting_q : int, ending_q : int, on_finish = None):
         """
         Take the first and last question of the QCM in arguments.
         """
+
+        # The on_finish idea was made by Chatgpt, I thought of it but I couldn't make it work myself.
 
         assert type(starting_q) == int, "The index must be an integer."
         assert type(ending_q) == int, "The index must be an integer."
@@ -20,6 +22,7 @@ class qcm_display():
         self.q_current : float = starting_q
         self.starting_q : int = starting_q
         self.ending_q : int = ending_q
+        self.on_finish = on_finish
 
         self.to_display : list = []
         self.score = Score()
@@ -115,6 +118,8 @@ class qcm_display():
         self.q_display.place_forget()
         self.ca_display.place_forget()
 
+        self.on_end_sceen : bool = True
+
         comment : str = ""
 
         if self.score.score / self.score.max_score <= 0.1:
@@ -130,17 +135,19 @@ class qcm_display():
         else:
             comment = "\n Vous avez eu un score parfait, Chuck Norris vous en félicite."
 
-        end_display = Label(self.root, text = "Vous venez d'atteindre la fin de ce QCM." + comment, font = ("Comic Sans MS", 22),
+        self.end_display = Label(self.root, text = "Vous venez d'atteindre la fin de ce QCM." + comment, font = ("Comic Sans MS", 22),
                             background = "Black", foreground = "White")
-        end_display.place(relx = 0.5, rely = 0.4, anchor = "center")
+        self.end_display.place(relx = 0.5, rely = 0.4, anchor = "center")
 
         self.s_display["text"] = str(self.score.score) + " sur " + str(self.score.max_score)
         self.s_display.place(relx = 0.5, rely = -0.1, anchor = "center")
 
         # Add 1 to both because otherwise the last element isn't show and if the start is -1 which is the right start, it will be 0 and not the last element.
-        correct_answers_display = Label(self.root, text = "Les bonnes réponses étaient: \n" + str(self.answers[self.starting_q + 1 : self.ending_q + 1]),
+        self.correct_answers_display = Label(self.root, text = "Les bonnes réponses étaient: \n" + str(self.answers[self.starting_q + 1 : self.ending_q + 1]),
                                         font = ("Comic Sans MS", 20), background = "Black", foreground = "White")
-        correct_answers_display.place(relx = 0.5, rely = 0.6, anchor = "center")
+        self.correct_answers_display.place(relx = 0.5, rely = 0.6, anchor = "center")
+        self.correct_answers_display.after(3000, self.on_finish)
+
         return None
 
     def launch(self) -> None :
@@ -157,8 +164,6 @@ class qcm_display():
         self.a3_display.place(relx = 0.1, y = 300, anchor = "nw")
         self.ca_display.place(relx = 0.5, y = 525, anchor = "center")
         self.s_display.place(relx = 0.5, y = 450, anchor = "center")
-
-        self.root.mainloop()
 
         return None
 
