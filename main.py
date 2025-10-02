@@ -34,7 +34,48 @@ def Home(ToggleEvents):
     Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=lambda: Transit(ToggleEvents))
     Start.grid(column=0, row=3)
     
+    ###################################################################### Cette partie est du troll et donc ne doit pas compter dans la note.
+    GS = PageBakaSombre()
+    GrandSage = tk.Button(Frame, text="Grand Sage", bg = "Black", fg="Green", command=GS.CreerPage)
+    GrandSage.grid(column=0, row=5)
+    
     Page.mainloop()
+    
+########################################################################## Cette partie est du troll et donc ne doit pas compter dans la note.
+class PageBakaSombre():
+    def __init__(self):
+        self.Frame_ = None
+        self.image = None
+        self.imageGS = None
+    
+    def CreerPage(self):
+        global Pagee
+        Pagee = tk.Toplevel()
+        self.Frame_ = tk.Frame(Pagee, bd = 5, relief = "ridge", bg = "Black")
+        self.Frame_.grid()
+        
+        Titr = tk.Label(self.Frame_, text="Si vous devez demander, jamais vous ne saurez. Si vous savez, il suffit de demander.", bg = "Black", fg="Green")
+        Titr.grid(column=0, row=0)
+        Entree = tk.Entry(self.Frame_, bg = "Black", fg="Green")
+        Entree.grid(column=0, row=1)
+        GrandSage = tk.Button(self.Frame_, text="Demander au grand sage", bg = "Black", fg="Green", command=self.AfficherImage)
+        GrandSage.grid(column=0, row=2)
+        
+        Image_GS = Image.open("GrandSage.webp")
+        Image_GS = Image_GS.resize((150, 100))
+        self.imageGS = ImageTk.PhotoImage(Image_GS)
+        ImgGS = tk.Label(self.Frame_, image=self.imageGS, bg = "Black", fg="Green")
+        ImgGS.grid(column=0, row=4)
+        
+        Pagee.mainloop()
+        
+    def AfficherImage(self):
+        Image_ = Image.open("Doigt.jpg")
+        Image_ = Image_.resize((400, 400))
+        self.image = ImageTk.PhotoImage(Image_)
+        Img = tk.Label(self.Frame_, image=self.image, bg = "Black", fg="Green")
+        Img.grid(column=0, row=4)
+#########################################################################################
     
 def Event():
     global Fini, NmPage
@@ -62,14 +103,14 @@ def Transit(ToggleEvents):
     BonnesReponses = correct_answer_list
     Reponses = []
     NmPage = 0
-    CallPage(NmPage, NumEvent)
+    CallPage(NmPage, NumEvent, BonnesReponses)
                 
-def CallPage(NmPage, NumEvent):
+def CallPage(NmPage, NumEvent, BonnesReponses):
     
     if NumEvent == NmPage:
         if ToggleEvents == True:
             Event()
-    if NmPage == 10:
+    if NmPage == len(BonnesReponses):
         Score()
     else:
         #display_q(NmPage)[0] Question
@@ -116,7 +157,7 @@ class CreerPageCustom:
         global NmPage
         NmPage += 1
         Pag.destroy()
-        CallPage(NmPage, self.NumEvent) #Ici on a de la recursivité.
+        CallPage(NmPage, self.NumEvent, BonnesReponses) #Ici on a de la recursivité.
     
 def Score():
     Score_ = 0
