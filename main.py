@@ -34,7 +34,38 @@ def Home(ToggleEvents):
     Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=lambda: Transit(ToggleEvents))
     Start.grid(column=0, row=3)
     
+    GS = PageBakaSombre()
+    GrandSage = tk.Button(Frame, text="Grand Sage", bg = "Black", fg="Green", command=GS.CreerPage)
+    GrandSage.grid(column=0, row=5)
+    
     Page.mainloop()
+    
+class PageBakaSombre():
+    def __init__(self):
+        self.Frame_ = None
+        self.image = None
+    
+    def CreerPage(self):
+        global Pagee
+        Pagee = tk.Toplevel()
+        self.Frame_ = tk.Frame(Pagee, bd = 5, relief = "ridge", bg = "Black")
+        self.Frame_.grid(padx=10, pady=10)
+        
+        Titr = tk.Label(self.Frame_, text="Si vous devez demander, jamais vous ne saurez. Si vous savez, il suffit de demander.", bg = "Black", fg="Green")
+        Titr.grid(column=0, row=0)
+        Entree = tk.Entry(self.Frame_, bg = "Black", fg="Green")
+        Entree.grid(column=0, row=1)
+        GrandSage = tk.Button(self.Frame_, text="Demander au grand sage", bg = "Black", fg="Green", command=self.AfficherImage)
+        GrandSage.grid(column=0, row=2)
+        
+        Pagee.mainloop()
+        
+    def AfficherImage(self):
+        Image_ = Image.open("Doigt.jpg")
+        Image_ = Image_.resize((100, 100))
+        self.image = ImageTk.PhotoImage(Image_)
+        Img = tk.Label(self.Frame_, image=self.image, bg = "Black", fg="Green")
+        Img.grid(column=0, row=4)
     
 def Event():
     global Fini, NmPage
