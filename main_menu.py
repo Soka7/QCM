@@ -1,14 +1,22 @@
 from tkinter import *
 import tkinter as tk
-from ui import qcm_display
 
-class Main_Menu():
+from ui import qcm_display
+from Extracted_QNA import sorted_questions
+
+class Main():
     def __init__(self):
         """
         Create the main Menu.
         """
 
         self.current_menu : list = []
+
+        self.current_difficulty : str = "Default"
+        self.current_theme : str = "Fun"
+
+        self.q_to_start : int = sorted_questions[self.current_theme][self.current_difficulty][0]
+        self.q_to_end : int = sorted_questions[self.current_theme][self.current_difficulty][1]
 
         self.root = tk.Tk()
         self.root.title("Multiple Choice Questions")
@@ -22,7 +30,7 @@ class Main_Menu():
         self.root.config(background = "Black")
 
         self.start_button = Button(self.root, text = "Commencer ?", font = ("Comic Sans MS", 24), borderwidth = 0, background = "Black",
-                                    activebackground = "Black", foreground = "White", command = lambda : self._start_qcm(0, 9))
+                                    activebackground = "Black", foreground = "White", command = lambda : self._start_qcm(self.q_to_start, self.q_to_end))
         self.setting_button = Button(self.root, text = "Paramètres", font = ("Comic Sans Ms", 24), borderwidth = 0, background = "Black",
                                     activebackground = "Black", foreground = "White", command = self._show_settings)
         self.quit_button = Button(self.root, text = "Quitter", font = ("Comic Sans MS", 24), borderwidth = 0, background = "Black",
@@ -46,6 +54,32 @@ class Main_Menu():
 
         return None
     
+    def _change_difficulty(self, difficulty : str) -> None:
+        """
+        Difficulty is a string.
+        Change the difficulty to the set difficulty.
+        """
+        
+        assert type(difficulty) == str, "The difficulty must be a string."
+
+        self.q_to_start = sorted_questions[self.current_theme][difficulty][0]
+        self.q_to_end = sorted_questions[self.current_theme][difficulty][1]
+
+        return None
+    
+    def _change_theme(self, theme : str) -> None:
+        """
+        Theme is a string.
+        Change the theme to the set theme.
+        """
+
+        assert type(theme) == str, "The theme argument must be a string."
+
+        self.q_to_start = sorted_questions[theme][self.current_difficulty][0]
+        self.q_to_end = sorted_questions[theme][self.current_difficulty][1]
+
+        return None
+    
     def _go_back(self) -> None:
         """
         Go back to the previous menu.
@@ -55,16 +89,37 @@ class Main_Menu():
             self.game.end_display.place_forget()
             self.game.s_display.place_forget()
             self.game.correct_answers_display.place_forget()
-            self._create_main_menu()
             del self.current_menu[-1]
+            self._create_main_menu()
 
         elif self.current_menu[-1] == "Settings":
             self.difficulty_button.place_forget()
             self.back_button.place_forget()
             self.language_button.place_forget()
             self.theme_button.place_forget()
-            self._create_main_menu()
             del self.current_menu[-1]
+            self._create_main_menu()
+
+        elif self.current_menu[-1] == "Difficulties":
+            self.easy_button.place_forget()
+            self.normal_button.place_forget()
+            self.hard_button.place_forget()
+            self.lunatic_button.place_forget()
+            self.back_button.place_forget()
+            del self.current_menu[-1]
+            self._show_settings()
+
+        elif self.current_menu[-1] == "Themes":
+            self.fun_button.place_forget()
+            self.maths_button.place_forget()
+            self.chuck_norris_button.place_forget()
+            self.geography_button.place_forget()
+            self.history_button.place_forget()
+            self.video_games_button.place_forget()
+            self.general_culture_button.place_forget()
+            self.back_button.place_forget()
+            del self.current_menu[-1]
+            self._show_settings()
 
         return None 
 
@@ -83,9 +138,9 @@ class Main_Menu():
         self.quit_button.place_forget()
 
         self.difficulty_button = Button(self.root, text = "Difficultés", font = ("Comic Sans MS", 24), background = "Black",
-                                        activebackground = "Black", borderwidth = 0, foreground = "White")
+                                        activebackground = "Black", borderwidth = 0, foreground = "White", command = self._show_difficulties)
         self.theme_button = Button(self.root, text = "Thèmes", font = ("Comic Sans MS", 24), background = "Black",
-                                        activebackground = "Black", borderwidth = 0, foreground = "White")
+                                        activebackground = "Black", borderwidth = 0, foreground = "White", command = self._show_themes)
         self.language_button = Button(self.root, text = "Langue", font = ("Comic Sans MS", 24), background = "Black",
                                         activebackground = "Black", borderwidth = 0, foreground = "White")
         self.back_button = Button(self.root, text = "Retour", font = ("Comic Sans MS", 24), background = "Black",
@@ -95,6 +150,72 @@ class Main_Menu():
         self.theme_button.place(relx = 0.5, rely = 0.35, anchor = "center")
         self.language_button.place(relx = 0.5, rely = 0.55, anchor = "center")
         self.back_button.place(relx = 0.5, rely = 0.85, anchor = "center")
+
+        return None
+    
+    def _show_difficulties(self) -> None:
+        """
+        Create and show the difficulty menu.
+        """
+
+        self.difficulty_button.place_forget()
+        self.back_button.place_forget()
+        self.theme_button.place_forget()
+        self.language_button.place_forget()
+
+        self.current_menu.append("Difficulties")
+
+        self.easy_button = Button(self.root, text = "Facile", font = ("Comic Sans MS", 24), background = "Black",
+                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_difficulty("Easy"))
+        self.normal_button = Button(self.root, text = "Normal", font = ("Comic Sans MS", 24), background = "Black",
+                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_difficulty("Normal"))
+        self.hard_button = Button(self.root, text = "Difficile", font = ("Comic Sans MS", 24), background = "Black",
+                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_difficulty("Hard"))
+        self.lunatic_button = Button(self.root, text = "Lunatique", font = ("Comic Sans MS", 24), background = "Black",
+                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_difficulty("Lunatic"))
+        
+        self.easy_button.place(relx = 0.5, rely = 0.1, anchor = "center")
+        self.normal_button.place(relx = 0.5, rely = 0.25, anchor = "center")
+        self.hard_button.place(relx = 0.5, rely = 0.4, anchor = "center")
+        self.lunatic_button.place(relx = 0.5, rely = 0.55, anchor = "center")
+        self.back_button.place(relx = 0.5, rely = 0.75, anchor = "center")
+
+        return None
+    
+    def _show_themes(self) -> None:
+        """
+        Show and create the themes menu.
+        """
+        self.difficulty_button.place_forget()
+        self.back_button.place_forget()
+        self.theme_button.place_forget()
+        self.language_button.place_forget()
+
+        self.current_menu.append("Themes")
+
+        self.fun_button = Button(self.root, text = "Fun", font = ("Comic Sans MS", 24), background = "Black",
+                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Fun"))
+        self.maths_button = Button(self.root, text = "Maths", font = ("Comic Sans MS", 24), background = "Black",
+                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Maths"))
+        self.chuck_norris_button = Button(self.root, text = "Chuck Norris", font = ("Comic Sans MS", 24), background = "Black",
+                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Chuck Norris"))
+        self.geography_button = Button(self.root, text = "Géographie", font = ("Comic Sans MS", 24), background = "Black",
+                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Geography"))
+        self.history_button = Button(self.root, text = "Histoire", font = ("Comic Sans MS", 24), background = "Black",
+                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("History"))
+        self.video_games_button = Button(self.root, text = "Jeux vidéos", font = ("Comic Sans MS", 24), background = "Black",
+                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Video Games"))
+        self.general_culture_button = Button(self.root, text = "Culture générale", font = ("Comic Sans MS", 24), background = "Black",
+                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("General Culture"))
+        
+        self.fun_button.place(relx = 0.25, rely = 0.1, anchor = "center")
+        self.maths_button.place(relx = 0.75, rely = 0.1, anchor = "center")
+        self.chuck_norris_button.place(relx = 0.25, rely = 0.25, anchor = "center")
+        self.geography_button.place(relx = 0.75, rely = 0.25, anchor = "center")
+        self.history_button.place(relx = 0.25, rely = 0.4, anchor = "center")
+        self.video_games_button.place(relx = 0.75, rely = 0.4, anchor = "center")
+        self.general_culture_button.place(relx = 0.5, rely = 0.55, anchor = "center")
+        self.back_button.place(relx = 0.5, rely = 0.75, anchor = "center")
 
         return None
 
@@ -144,5 +265,5 @@ class Main_Menu():
 
         return None
 
-d=Main_Menu()
+d=Main()
 d.start_game()
