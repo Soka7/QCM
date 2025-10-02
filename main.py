@@ -62,14 +62,14 @@ def Transit(ToggleEvents):
     BonnesReponses = correct_answer_list
     Reponses = []
     NmPage = 0
-    CallPage(NmPage, NumEvent)
+    CallPage(NmPage, NumEvent, BonnesReponses)
                 
-def CallPage(NmPage, NumEvent):
+def CallPage(NmPage, NumEvent, BonnesReponses):
     
     if NumEvent == NmPage:
         if ToggleEvents == True:
             Event()
-    if NmPage == 10:
+    if NmPage == len(BonnesReponses):
         Score()
     else:
         #display_q(NmPage)[0] Question
@@ -116,7 +116,7 @@ class CreerPageCustom:
         global NmPage
         NmPage += 1
         Pag.destroy()
-        CallPage(NmPage, self.NumEvent) #Ici on a de la recursivité.
+        CallPage(NmPage, self.NumEvent, BonnesReponses) #Ici on a de la recursivité.
     
 def Score():
     Score_ = 0
