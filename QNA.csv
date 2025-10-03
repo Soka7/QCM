@@ -21,3 +21,33 @@ Combien de chiffres existe-t-il ?, 10, 9, + l'infini, 1
 Si un carré a 3 cotés de 4 centimètres. De quelle longeur est le 4ème coté ?, 3, 4, 16, 2
 Quelle est le résultat de 6 x 7 ?, 32, 42, 67, 2
 Quelle est le résultat de 9846545 x 0 x 8455 x 154 ?, 12820890848150, 11453946201394, 0, 3
+Quelle est l'aire d'un rectange de longueur 13 et de hauteur 12 ?, 169, 156, 130, 2
+Max essaye de faire un triangle de rectangle de base 6 et de coté opposé 8. Il souhaite faire l'hypothénuse en premier. Quelle est la longuer de ce coté ?, 10, 9, sqrt(48), 1
+Quelle est la formule d'aire d'un triangle rectangle ?, base * hauteur, base * hauteur / 2, base / hauteur, 2
+Combien vaut pi ?, 3, e, 3.14, 3
+Une minute vaut 60 seconde et une heure 60 minutes. Combien il y a t-il de secondes dans une heure ?, 3600, 60, 60000, 1
+A quelle vitesse en mètres / secondes allons nous a 72 km/h ?, 10 m/s, 72 m/s, 20 m/s, 3
+Quelle est la racinne carrée de 121 ?, 12.1, -11, 11i, 2
+Quelle est la formule de l'aire d'un cercle ?, 2 pi * r^2, 2 pi * r, pi * r^2, 3
+Théo a un sachet de 31 bonbons. Il souhaite les partager équitablement avec ses 9 amis. Combiens de bonbons restera-t-il ?, 0, 1, 4, 2
+Qui a crée le théorème permettant de trouvant l'agrandissement entre deux triangles comportant les mêmes angles ?, Thales, Pythagore, Fourier, 1
+Quelle est l'image de la fonction f(x) = 3x^2 +2x -7 avec l'antécédent 7 ?, 154, 138, 107, 1
+Quelle est la somme des premiers entiers naturels de 1 a 12 ?, 55, 78, 63, 2
+Qui est le célèbre mathématicien qui a donné la notation d/d(x) ?, Leibniz, Descartes, Newton, 1
+Quelle est l'hypothénuse du triangle rectangle de coté sqrt(52) et -6i ?, 4sqrt(11), 8sqrt(22), 2sqrt(2)sqrt(11), 3
+Quelle est le produit scalaire de deux vecteur orthogonaux de longeur 7 et 4?, 28, 0, 14, 2
+Tom affirme que la fonction f(x) = 0.8^x * sqrt(x) - x^2 tend vers 0 es-ce vrai ?, Oui, Non, Pas assez de précision, 2
+Qui a trouvé la formule de l'intégrale ?, Riemann, Lebesgue et Henstock, Leibniz et Newton, 3
+Vers quoi tend un polygone avec n cotés ?, Un cercle, Un carré, Une ligne, 1
+Quelle est la formule du discrimant pour delta > 0 ?, -b/2a, c^2 -4ab, b^2 - 4ac, 3
+Un objet a 10% de chance d'etre obtenu et 5% d'etre un arc. Quelle est la probabilité qu'il soit un arc ?, 0.05, 0.005, 0.025, 2
+Quelle est la valeur de pi ?, 3.14159265358979323846269, 3.14159265358979323846264, 3.14159265358979323846272, 2
+Qui a inventé le concept de factorielle ?, Christian Kamp, Leonhard Euler, Leibniz, 2
+Quelle est la formule de e ?, la somme de 1 a n de 1/n!, l'intégrale de 0 a + l'infini de f(x) = pi * x / cos(x), Il n'y en a pas, 1
+Qui a trouvé le nombre d'or ?, Joseph Fourier, René Descartes,Leonardo Fibonacci, 3
+Que représente la suite d'or ?, Une suite avec des nombres compliqués, la somme des deux termes précedents, la division des deux nombres précédents, 2
+Quelle est le plus grand nombre créable avec 64 bit en double précision ?, 1.79E308, 1.89E308, 1.69E308, 1
+Comment se calcule une intégrale de "a" a "b" ?, f(a) - f(b), F(b) - F(a) + C, F(b) - F(a), 3
+Que faut-il vérifier avant d'inverser une matrice carrée ?, (a+b) - (c+d) !=0, a*d - b*c != 0, a/d + b/d !=0, 2
+En quoi consiste une primitive ?, multiplier par x, diviser par x, ajouter C, 1
+Combien vaut factorielle(10) ?, 362880, 3628800, 1/362880, 2
