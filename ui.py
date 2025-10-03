@@ -28,14 +28,17 @@ class qcm_display():
         self.score = Score()
         self.answers : list = correct_answer_list
 
-        self.q_display = Label(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White")
+        self.q_display = Label(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White", wraplength = 800)
         self.a1_display = Button(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", borderwidth = 0,
-                                 activebackground = "Black", foreground = "White", command = lambda : self._next_question(1), state = "normal")
+                                 activebackground = "Black", foreground = "White", wraplength = 600,
+                                 command = lambda : self._next_question(1), state = "normal")
         self.a2_display = Button(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", borderwidth = 0,
-                                 activebackground = "Black", foreground = "White", command = lambda : self._next_question(2), state = "normal")
+                                 activebackground = "Black", foreground = "White", wraplength = 600,
+                                 command = lambda : self._next_question(2), state = "normal")
         self.a3_display = Button(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", borderwidth = 0,
-                                 activebackground = "Black", foreground = "White", command = lambda : self._next_question(3), state = "normal")
-        self.ca_display = Label(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White")
+                                 activebackground = "Black", foreground = "White", wraplength = 600, 
+                                 command = lambda : self._next_question(3), state = "normal")
+        self.ca_display = Label(self.root, text = "", font = ("Comic Sans MS", 20), background = "Black", foreground = "White", wraplength = 800)
         self.s_display = Label(self.root, text = "", font = ("Comic Sans MS", 24), background = "Black", foreground = "White")
 
     def _button_disabler(self) -> None:
