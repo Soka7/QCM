@@ -62,6 +62,8 @@ class Main():
         
         assert type(difficulty) == str, "The difficulty must be a string."
 
+        self.current_difficulty = difficulty
+
         self.q_to_start = sorted_questions[self.current_theme][difficulty][0]
         self.q_to_end = sorted_questions[self.current_theme][difficulty][1]
 
@@ -74,6 +76,8 @@ class Main():
         """
 
         assert type(theme) == str, "The theme argument must be a string."
+
+        self.current_theme = theme
 
         self.q_to_start = sorted_questions[theme][self.current_difficulty][0]
         self.q_to_end = sorted_questions[theme][self.current_difficulty][1]
