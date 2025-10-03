@@ -116,7 +116,6 @@ class Main():
         elif self.current_menu[-1] == "Themes":
             self.fun_button.place_forget()
             self.maths_button.place_forget()
-            self.chuck_norris_button.place_forget()
             self.geography_button.place_forget()
             self.history_button.place_forget()
             self.video_games_button.place_forget()
@@ -201,8 +200,6 @@ class Main():
                                 activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Fun"))
         self.maths_button = Button(self.root, text = "Maths", font = ("Comic Sans MS", 24), background = "Black",
                                 activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Maths"))
-        self.chuck_norris_button = Button(self.root, text = "Chuck Norris", font = ("Comic Sans MS", 24), background = "Black",
-                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Chuck Norris"))
         self.geography_button = Button(self.root, text = "Géographie", font = ("Comic Sans MS", 24), background = "Black",
                                 activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Geography"))
         self.history_button = Button(self.root, text = "Histoire", font = ("Comic Sans MS", 24), background = "Black",
@@ -214,11 +211,10 @@ class Main():
         
         self.fun_button.place(relx = 0.25, rely = 0.1, anchor = "center")
         self.maths_button.place(relx = 0.75, rely = 0.1, anchor = "center")
-        self.chuck_norris_button.place(relx = 0.25, rely = 0.25, anchor = "center")
-        self.geography_button.place(relx = 0.75, rely = 0.25, anchor = "center")
-        self.history_button.place(relx = 0.25, rely = 0.4, anchor = "center")
-        self.video_games_button.place(relx = 0.75, rely = 0.4, anchor = "center")
-        self.general_culture_button.place(relx = 0.5, rely = 0.55, anchor = "center")
+        self.geography_button.place(relx = 0.25, rely = 0.25, anchor = "center")
+        self.history_button.place(relx = 0.75, rely = 0.25, anchor = "center")
+        self.video_games_button.place(relx = 0.25, rely = 0.4, anchor = "center")
+        self.general_culture_button.place(relx = 0.75, rely = 0.4, anchor = "center")
         self.back_button.place(relx = 0.5, rely = 0.75, anchor = "center")
 
         return None
