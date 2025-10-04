@@ -109,6 +109,7 @@ class Main():
             self.normal_button.place_forget()
             self.hard_button.place_forget()
             self.lunatic_button.place_forget()
+            self.all_button.place_forget()
             self.back_button.place_forget()
             del self.current_menu[-1]
             self._show_settings()
@@ -176,12 +177,15 @@ class Main():
                                 activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_difficulty("Hard"))
         self.lunatic_button = Button(self.root, text = "Lunatique", font = ("Comic Sans MS", 24), background = "Black",
                                 activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_difficulty("Lunatic"))
+        self.all_button = Button(self.root, text = "Toutes", font = ("Comic Sans MS", 24), background = "Black",
+                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_difficulty("All"))
         
-        self.easy_button.place(relx = 0.5, rely = 0.1, anchor = "center")
-        self.normal_button.place(relx = 0.5, rely = 0.25, anchor = "center")
-        self.hard_button.place(relx = 0.5, rely = 0.4, anchor = "center")
-        self.lunatic_button.place(relx = 0.5, rely = 0.55, anchor = "center")
-        self.back_button.place(relx = 0.5, rely = 0.75, anchor = "center")
+        self.easy_button.place(relx = 0.5, rely = 0.05, anchor = "center")
+        self.normal_button.place(relx = 0.5, rely = 0.2, anchor = "center")
+        self.hard_button.place(relx = 0.5, rely = 0.35, anchor = "center")
+        self.lunatic_button.place(relx = 0.5, rely = 0.5, anchor = "center")
+        self.all_button.place(relx = 0.5, rely = 0.65, anchor = "center")
+        self.back_button.place(relx = 0.5, rely = 0.85, anchor = "center")
 
         return None
     
