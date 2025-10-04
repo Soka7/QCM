@@ -29,6 +29,8 @@ class Main():
 
         self.root.config(background = "Black")
 
+        self.comment_display = Label(self.root, text = sorted_questions[self.current_theme][self.current_difficulty + "Text"], font = ("Comic Sans MS", 24), borderwidth = 0, background = "Black",
+                                    activebackground = "Black", foreground = "White", wraplength = 800)
         self.start_button = Button(self.root, text = "Commencer ?", font = ("Comic Sans MS", 24), borderwidth = 0, background = "Black",
                                     activebackground = "Black", foreground = "White", command = lambda : self._start_qcm(self.q_to_start, self.q_to_end))
         self.setting_button = Button(self.root, text = "Paramètres", font = ("Comic Sans Ms", 24), borderwidth = 0, background = "Black",
@@ -64,6 +66,8 @@ class Main():
 
         self.current_difficulty = difficulty
 
+        self.comment_display["text"] = sorted_questions[self.current_theme][difficulty + "Text"]
+
         self.q_to_start = sorted_questions[self.current_theme][difficulty][0]
         self.q_to_end = sorted_questions[self.current_theme][difficulty][1]
 
@@ -78,6 +82,8 @@ class Main():
         assert type(theme) == str, "The theme argument must be a string."
 
         self.current_theme = theme
+
+        self.comment_display["text"] = sorted_questions[theme][self.current_difficulty + "Text"]
 
         self.q_to_start = sorted_questions[theme][self.current_difficulty][0]
         self.q_to_end = sorted_questions[theme][self.current_difficulty][1]
@@ -137,6 +143,7 @@ class Main():
 
         self._change_window_size(600, 800)
 
+        self.comment_display.place_forget()
         self.start_button.place_forget()
         self.setting_button.place_forget()
         self.quit_button.place_forget()
@@ -238,6 +245,7 @@ class Main():
         self.start_button.place_forget()
         self.setting_button.place_forget()
         self.quit_button.place_forget()
+        self.comment_display.place_forget()
 
         self.game = qcm_display(self.root, starting_q - 1, ending_q, self._go_back)
         self.game.launch()
@@ -253,6 +261,7 @@ class Main():
 
         self._change_window_size(1200, 760)
 
+        self.comment_display.place(relx = 0.5, rely = 0.2, anchor = "center")
         self.start_button.place(x = 480, y = 410)
         self.setting_button.place(x = 480, y = 510)
         self.quit_button.place(x = 480, y = 610)
