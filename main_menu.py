@@ -1,7 +1,7 @@
 from tkinter import *
 import tkinter as tk
 
-from ui import qcm_display
+from QCM_displayer import qcm_display
 from Extracted_QNA import sorted_questions
 
 class Main():
@@ -99,7 +99,7 @@ class Main():
         elif self.current_menu[-1] == "Settings":
             self.difficulty_button.place_forget()
             self.back_button.place_forget()
-            self.language_button.place_forget()
+            self.event_button.place_forget()
             self.theme_button.place_forget()
             del self.current_menu[-1]
             self._create_main_menu()
@@ -144,14 +144,14 @@ class Main():
                                         activebackground = "Black", borderwidth = 0, foreground = "White", command = self._show_difficulties)
         self.theme_button = Button(self.root, text = "Thèmes", font = ("Comic Sans MS", 24), background = "Black",
                                         activebackground = "Black", borderwidth = 0, foreground = "White", command = self._show_themes)
-        self.language_button = Button(self.root, text = "Langue", font = ("Comic Sans MS", 24), background = "Black",
+        self.event_button = Button(self.root, text = "Events", font = ("Comic Sans MS", 24), background = "Black",
                                         activebackground = "Black", borderwidth = 0, foreground = "White")
         self.back_button = Button(self.root, text = "Retour", font = ("Comic Sans MS", 24), background = "Black",
                                         activebackground = "Black", borderwidth = 0, foreground = "White", command = self._go_back)
         
         self.difficulty_button.place(relx = 0.5, rely = 0.15, anchor = "center")
         self.theme_button.place(relx = 0.5, rely = 0.35, anchor = "center")
-        self.language_button.place(relx = 0.5, rely = 0.55, anchor = "center")
+        self.event_button.place(relx = 0.5, rely = 0.55, anchor = "center")
         self.back_button.place(relx = 0.5, rely = 0.85, anchor = "center")
 
         return None
@@ -164,7 +164,7 @@ class Main():
         self.difficulty_button.place_forget()
         self.back_button.place_forget()
         self.theme_button.place_forget()
-        self.language_button.place_forget()
+        self.event_button.place_forget()
 
         self.current_menu.append("Difficulties")
 
@@ -192,7 +192,7 @@ class Main():
         self.difficulty_button.place_forget()
         self.back_button.place_forget()
         self.theme_button.place_forget()
-        self.language_button.place_forget()
+        self.event_button.place_forget()
 
         self.current_menu.append("Themes")
 
