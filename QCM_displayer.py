@@ -121,8 +121,6 @@ class qcm_display():
         self.q_display.place_forget()
         self.ca_display.place_forget()
 
-        self.on_end_sceen : bool = True
-
         comment : str = ""
 
         if self.score.score / self.score.max_score <= 0.1:
