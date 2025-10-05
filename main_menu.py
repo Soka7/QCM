@@ -37,6 +37,12 @@ class Main():
         self.hard_button : Button = Button(self.root)
         self.lunatic_button : Button = Button(self.root)
         self.all_button : Button = Button(self.root)
+        self.fun_button : Button = Button(self.root)
+        self.maths_button : Button = Button(self.root)
+        self.geography_button : Button = Button(self.root)
+        self.history_button : Button = Button(self.root)
+        self.video_games_button : Button = Button(self.root)
+        self.general_culture_button : Button = Button(self.root)
         
     def _change_window_size(self, width : int, height : int) -> None:
         """
@@ -206,18 +212,12 @@ class Main():
 
         self.current_menu.append("Themes")
 
-        self.fun_button = Button(self.root, text = "Fun", font = ("Comic Sans MS", 24), background = "Black",
-                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Fun"))
-        self.maths_button = Button(self.root, text = "Maths", font = ("Comic Sans MS", 24), background = "Black",
-                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Maths"))
-        self.geography_button = Button(self.root, text = "Géographie", font = ("Comic Sans MS", 24), background = "Black",
-                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Geography"))
-        self.history_button = Button(self.root, text = "Histoire", font = ("Comic Sans MS", 24), background = "Black",
-                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("History"))
-        self.video_games_button = Button(self.root, text = "Jeux vidéos", font = ("Comic Sans MS", 24), background = "Black",
-                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("Video Games"))
-        self.general_culture_button = Button(self.root, text = "Culture générale", font = ("Comic Sans MS", 24), background = "Black",
-                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_theme("General Culture"))
+        self.fun_button = Button(self.root, text = "Fun", command = lambda : self._change_theme("Fun"))
+        self.maths_button = Button(self.root, text = "Maths", command = lambda : self._change_theme("Maths"))
+        self.geography_button = Button(self.root, text = "Géographie", foreground = "White", command = lambda : self._change_theme("Geography"))
+        self.history_button = Button(self.root, text = "Histoire", command = lambda : self._change_theme("History"))
+        self.video_games_button = Button(self.root, text = "Jeux vidéos", command = lambda : self._change_theme("Video Games"))
+        self.general_culture_button = Button(self.root, text = "Culture générale", command = lambda : self._change_theme("General Culture"))
         
         self.fun_button.place(relx = 0.25, rely = 0.1, anchor = "center")
         self.maths_button.place(relx = 0.75, rely = 0.1, anchor = "center")
@@ -226,6 +226,8 @@ class Main():
         self.video_games_button.place(relx = 0.25, rely = 0.4, anchor = "center")
         self.general_culture_button.place(relx = 0.75, rely = 0.4, anchor = "center")
         self.back_button.place(relx = 0.5, rely = 0.75, anchor = "center")
+
+        self._enhance_ui()
 
         return None
 
@@ -352,6 +354,33 @@ class Main():
             self.lunatic_button.bind('<Leave>', lambda e: self._on_default(e, "#FF00A6", ("Constantia", 24)))
             self.all_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Constantia", 28)))
             self.all_button.bind('<Leave>', lambda e: self._on_default(e, "#00DDFF", ("Constantia", 24)))
+
+        elif self.current_menu[-1] == "Themes":
+            self.fun_button.config(background = "#040444", activebackground = "#040444", foreground = "#00FF00",
+                                    activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+            self.maths_button.config(background = "#040444", activebackground = "#040444", foreground = "#C55B5B",
+                                    activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+            self.geography_button.config(background = "#040444", activebackground = "#040444", foreground = "#18D8FF",
+                                    activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+            self.history_button.config(background = "#040444", activebackground = "#040444", foreground = "#BEBB22",
+                                    activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+            self.video_games_button.config(background = "#040444", activebackground = "#040444", foreground = "#5A13DF",
+                                    activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+            self.general_culture_button.config(background = "#040444", activebackground = "#040444", foreground = "#E92FC7",
+                                    activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+            
+            self.fun_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Century Gothic", 28)))
+            self.fun_button.bind('<Leave>', lambda e: self._on_default(e, "#00FF00", ("Century Gothic", 24)))
+            self.maths_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Century Gothic", 28)))
+            self.maths_button.bind('<Leave>', lambda e: self._on_default(e, "#C55B5B", ("Century Gothic", 24)))
+            self.geography_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Century Gothic", 28)))
+            self.geography_button.bind('<Leave>', lambda e: self._on_default(e, "#18D8FF", ("Century Gothic", 24)))
+            self.history_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Century Gothic", 28)))
+            self.history_button.bind('<Leave>', lambda e: self._on_default(e, "#BEBB22", ("Century Gothic", 24)))
+            self.video_games_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Century Gothic", 28)))
+            self.video_games_button.bind('<Leave>', lambda e: self._on_default(e, "#5A13DF", ("Century Gothic", 24)))
+            self.general_culture_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Century Gothic", 28)))
+            self.general_culture_button.bind('<Leave>', lambda e: self._on_default(e, "#E92FC7", ("Century Gothic", 24)))
 
         return None
 
