@@ -19,24 +19,16 @@ class Main():
         self.q_to_end : int = sorted_questions[self.current_theme][self.current_difficulty][1]
 
         self.root = tk.Tk()
-        self.root.title("Multiple Choice Questions")
-
-        # Code from https://stackoverflow.com/questions/14910858/how-to-specify-where-a-tkinter-window-opens until config.
-        # "%dx%d+%d+%d" is a format string where each %d take a value of the tuple after %
-        # Essentially, it creates a 1200x760 window at the center of the screen.
+        self.root.title("Un QCM peu commun !")
 
         self._change_window_size(1200, 760)
 
-        self.root.config(background = "Black")
+        self.comment_display = Label(self.root, text = sorted_questions[self.current_theme][self.current_difficulty + "Text"])
+        self.start_button = Button(self.root, text = "Commencer ?", command = lambda : self._start_qcm(self.q_to_start, self.q_to_end))
+        self.setting_button = Button(self.root, text = "Paramètres", command = self._show_settings)
+        self.quit_button = Button(self.root, text = "Quitter", command = self.root.quit)
 
-        self.comment_display = Label(self.root, text = sorted_questions[self.current_theme][self.current_difficulty + "Text"], font = ("Comic Sans MS", 24), borderwidth = 0, background = "Black",
-                                    activebackground = "Black", foreground = "White", wraplength = 800)
-        self.start_button = Button(self.root, text = "Commencer ?", font = ("Comic Sans MS", 24), borderwidth = 0, background = "Black",
-                                    activebackground = "Black", foreground = "White", command = lambda : self._start_qcm(self.q_to_start, self.q_to_end))
-        self.setting_button = Button(self.root, text = "Paramètres", font = ("Comic Sans Ms", 24), borderwidth = 0, background = "Black",
-                                    activebackground = "Black", foreground = "White", command = self._show_settings)
-        self.quit_button = Button(self.root, text = "Quitter", font = ("Comic Sans MS", 24), borderwidth = 0, background = "Black",
-                                    activebackground = "Black", foreground = "White", command = self.root.quit)
+        self.difficulty_button : Label = Label(self.root)
         
     def _change_window_size(self, width : int, height : int) -> None:
         """
@@ -44,6 +36,10 @@ class Main():
         Change the window to width by height size.
         """
         
+        # Code from https://stackoverflow.com/questions/14910858/how-to-specify-where-a-tkinter-window-opens
+        # "%dx%d+%d+%d" is a format string where each %d take a value of the tuple after %
+        # Essentially, it creates a 1200x760 window at the center of the screen.
+
         assert type(width) == int and type(height) == int, "Both arguments must be integers."
 
         screen_width : int = self.root.winfo_screenwidth()
@@ -53,40 +49,6 @@ class Main():
         window_y : float = screen_height / 2 - height / 2
 
         self.root.geometry("%dx%d+%d+%d" % (width, height, window_x, window_y))
-
-        return None
-    
-    def _change_difficulty(self, difficulty : str) -> None:
-        """
-        Difficulty is a string.
-        Change the difficulty to the set difficulty.
-        """
-        
-        assert type(difficulty) == str, "The difficulty must be a string."
-
-        self.current_difficulty = difficulty
-
-        self.comment_display["text"] = sorted_questions[self.current_theme][difficulty + "Text"]
-
-        self.q_to_start = sorted_questions[self.current_theme][difficulty][0]
-        self.q_to_end = sorted_questions[self.current_theme][difficulty][1]
-
-        return None
-    
-    def _change_theme(self, theme : str) -> None:
-        """
-        Theme is a string.
-        Change the theme to the set theme.
-        """
-
-        assert type(theme) == str, "The theme argument must be a string."
-
-        self.current_theme = theme
-
-        self.comment_display["text"] = sorted_questions[theme][self.current_difficulty + "Text"]
-
-        self.q_to_start = sorted_questions[theme][self.current_difficulty][0]
-        self.q_to_end = sorted_questions[theme][self.current_difficulty][1]
 
         return None
     
@@ -132,6 +94,40 @@ class Main():
             self._show_settings()
 
         return None 
+    
+    def _change_difficulty(self, difficulty : str) -> None:
+        """
+        Difficulty is a string.
+        Change the difficulty to the set difficulty.
+        """
+        
+        assert type(difficulty) == str, "The difficulty must be a string."
+
+        self.current_difficulty = difficulty
+
+        self.comment_display["text"] = sorted_questions[self.current_theme][difficulty + "Text"]
+
+        self.q_to_start = sorted_questions[self.current_theme][difficulty][0]
+        self.q_to_end = sorted_questions[self.current_theme][difficulty][1]
+
+        return None
+    
+    def _change_theme(self, theme : str) -> None:
+        """
+        Theme is a string.
+        Change the theme to the set theme.
+        """
+
+        assert type(theme) == str, "The theme argument must be a string."
+
+        self.current_theme = theme
+
+        self.comment_display["text"] = sorted_questions[theme][self.current_difficulty + "Text"]
+
+        self.q_to_start = sorted_questions[theme][self.current_difficulty][0]
+        self.q_to_end = sorted_questions[theme][self.current_difficulty][1]
+
+        return None
 
     def _show_settings(self) -> None:
         """
@@ -156,11 +152,13 @@ class Main():
                                         activebackground = "Black", borderwidth = 0, foreground = "White")
         self.back_button = Button(self.root, text = "Retour", font = ("Comic Sans MS", 24), background = "Black",
                                         activebackground = "Black", borderwidth = 0, foreground = "White", command = self._go_back)
-        
+
         self.difficulty_button.place(relx = 0.5, rely = 0.15, anchor = "center")
         self.theme_button.place(relx = 0.5, rely = 0.35, anchor = "center")
         self.event_button.place(relx = 0.5, rely = 0.55, anchor = "center")
         self.back_button.place(relx = 0.5, rely = 0.85, anchor = "center")
+
+        self._enhance_ui()
 
         return None
     
@@ -268,15 +266,66 @@ class Main():
 
         return None
 
+    # The following 2 functions have been made using this tutorial: https://youtu.be/fGx8-RmaJbg
+
+    def _on_hover(self, event, used_font : tuple = ("Freestyle Script", 48) ) -> None:
+        """
+        Apply a small animation when the mouse hover a widget.
+        """
+        event.widget["foreground"] = "#FF2828"
+        event.widget["font"] = used_font
+        return None
+    
+    def _on_default(self, event, used_font : tuple = ("Freestyle Script", 48)) -> None:
+        """
+        Apply a small animation when the mouse is no longer hovering a widget.
+        """
+        event.widget["foreground"] = "#E9FA2E"
+        event.widget["font"] = used_font
+
+        return None
+
+    def _enhance_ui(self) -> None:
+        """
+        Make the app look beautiful.
+        """
+
+        self.root.config(background = "#040444") # Color taken from "Qui veut gagner des millions"'s background.
+
+        if self.current_menu[-1] == "Main_menu":
+            self.comment_display.config(background = "#040444", foreground = "#B0A926", font = ("Papyrus", 32), wraplength = 1000)
+
+            ## Main Menu part
+            self.start_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E", activeforeground = "#FF2828",
+                                    font = ("Freestyle Script", 48), borderwidth = 0)
+            self.setting_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E", activeforeground = "#FF2828",
+                                    font = ("Freestyle Script", 48), borderwidth = 0)
+            self.quit_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E", activeforeground = "#FF2828",
+                                    font = ("Freestyle Script", 48), borderwidth = 0)
+            
+            # Used Chatgpt to make the lambda functions work.
+            self.start_button.bind('<Enter>', lambda e: self._on_hover(e, ("Freestyle Script", 52)))
+            self.start_button.bind('<Leave>', self._on_default)
+            self.setting_button.bind('<Enter>', lambda e: self._on_hover(e, ("Freestyle Script", 52)))
+            self.setting_button.bind('<Leave>', self._on_default)
+            self.quit_button.bind('<Enter>', lambda e: self._on_hover(e, ("Freestyle Script", 52)))
+            self.quit_button.bind('<Leave>', self._on_default)
+
+        elif self.current_menu[-1] == "Settings" :
+            ## Settings Menu Part
+            self.difficulty_button.config(background = "#040444", activebackground = "#040444", foreground = "#FFFFFF")
+
+        return None
+
     def start_game(self) -> None:
         """
         Start the game.
         """
-
         self._create_main_menu()
+        self._enhance_ui()
         self.root.mainloop()
 
         return None
-
-d=Main()
-d.start_game()
+    
+app = Main()
+app.start_game()
