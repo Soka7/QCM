@@ -32,6 +32,11 @@ class Main():
         self.theme_button : Button = Button(self.root)
         self.event_button : Button = Button(self.root)
         self.back_button : Button = Button(self.root)
+        self.easy_button : Button = Button(self.root)
+        self.normal_button : Button = Button(self.root)
+        self.hard_button : Button = Button(self.root)
+        self.lunatic_button : Button = Button(self.root)
+        self.all_button : Button = Button(self.root)
         
     def _change_window_size(self, width : int, height : int) -> None:
         """
@@ -173,16 +178,11 @@ class Main():
 
         self.current_menu.append("Difficulties")
 
-        self.easy_button = Button(self.root, text = "Facile", font = ("Comic Sans MS", 24), background = "Black",
-                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_difficulty("Easy"))
-        self.normal_button = Button(self.root, text = "Normal", font = ("Comic Sans MS", 24), background = "Black",
-                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_difficulty("Normal"))
-        self.hard_button = Button(self.root, text = "Difficile", font = ("Comic Sans MS", 24), background = "Black",
-                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_difficulty("Hard"))
-        self.lunatic_button = Button(self.root, text = "Lunatique", font = ("Comic Sans MS", 24), background = "Black",
-                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_difficulty("Lunatic"))
-        self.all_button = Button(self.root, text = "Toutes", font = ("Comic Sans MS", 24), background = "Black",
-                                activebackground = "Blue", borderwidth = 0, foreground = "White", command = lambda : self._change_difficulty("All"))
+        self.easy_button = Button(self.root, text = "Facile", command = lambda : self._change_difficulty("Easy"))
+        self.normal_button = Button(self.root, text = "Normal", command = lambda : self._change_difficulty("Normal"))
+        self.hard_button = Button(self.root, text = "Difficile", command = lambda : self._change_difficulty("Hard"))
+        self.lunatic_button = Button(self.root, text = "Lunatique", command = lambda : self._change_difficulty("Lunatic"))
+        self.all_button = Button(self.root, text = "Toutes", command = lambda : self._change_difficulty("All"))
         
         self.easy_button.place(relx = 0.5, rely = 0.05, anchor = "center")
         self.normal_button.place(relx = 0.5, rely = 0.2, anchor = "center")
@@ -190,6 +190,8 @@ class Main():
         self.lunatic_button.place(relx = 0.5, rely = 0.5, anchor = "center")
         self.all_button.place(relx = 0.5, rely = 0.65, anchor = "center")
         self.back_button.place(relx = 0.5, rely = 0.85, anchor = "center")
+
+        self._enhance_ui()
 
         return None
     
@@ -327,6 +329,29 @@ class Main():
             self.event_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Century Gothic", 24))))
             self.back_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Century Gothic", 28))))
             self.back_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Century Gothic", 24))))
+        
+        elif self.current_menu[-1] == "Difficulties":
+            self.easy_button.config(background = "#040444", activebackground = "#040444", foreground = "#28DF1F",
+                                    activeforeground = "#FF1616", font = ("Constantia", 24), borderwidth = 0)
+            self.normal_button.config(background = "#040444", activebackground = "#040444", foreground = "#372BBC",
+                                    activeforeground = "#FF1616", font = ("Constantia", 24), borderwidth = 0)
+            self.hard_button.config(background = "#040444", activebackground = "#040444", foreground = "#B31212",
+                                    activeforeground = "#FF1616", font = ("Constantia", 24), borderwidth = 0)
+            self.lunatic_button.config(background = "#040444", activebackground = "#040444", foreground = "#FF00A6",
+                                    activeforeground = "#FF1616", font = ("Constantia", 24), borderwidth = 0)
+            self.all_button.config(background = "#040444", activebackground = "#040444", foreground = "#00DDFF",
+                                    activeforeground = "#FF1616", font = ("Constantia", 24), borderwidth = 0)
+
+            self.easy_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Constantia", 28)))
+            self.easy_button.bind('<Leave>', lambda e: self._on_default(e, "#28DF1F", ("Constantia", 24)))
+            self.normal_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Constantia", 28)))
+            self.normal_button.bind('<Leave>', lambda e: self._on_default(e, "#372BBC", ("Constantia", 24)))
+            self.hard_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Constantia", 28)))
+            self.hard_button.bind('<Leave>', lambda e: self._on_default(e, "#B31212", ("Constantia", 24)))
+            self.lunatic_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Constantia", 28)))
+            self.lunatic_button.bind('<Leave>', lambda e: self._on_default(e, "#FF00A6", ("Constantia", 24)))
+            self.all_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Constantia", 28)))
+            self.all_button.bind('<Leave>', lambda e: self._on_default(e, "#00DDFF", ("Constantia", 24)))
 
         return None
 
