@@ -28,7 +28,10 @@ class Main():
         self.setting_button = Button(self.root, text = "Paramètres", command = self._show_settings)
         self.quit_button = Button(self.root, text = "Quitter", command = self.root.quit)
 
-        self.difficulty_button : Label = Label(self.root)
+        self.difficulty_button : Button = Button(self.root)
+        self.theme_button : Button = Button(self.root)
+        self.event_button : Button = Button(self.root)
+        self.back_button : Button = Button(self.root)
         
     def _change_window_size(self, width : int, height : int) -> None:
         """
@@ -144,14 +147,10 @@ class Main():
         self.setting_button.place_forget()
         self.quit_button.place_forget()
 
-        self.difficulty_button = Button(self.root, text = "Difficultés", font = ("Comic Sans MS", 24), background = "Black",
-                                        activebackground = "Black", borderwidth = 0, foreground = "White", command = self._show_difficulties)
-        self.theme_button = Button(self.root, text = "Thèmes", font = ("Comic Sans MS", 24), background = "Black",
-                                        activebackground = "Black", borderwidth = 0, foreground = "White", command = self._show_themes)
-        self.event_button = Button(self.root, text = "Events", font = ("Comic Sans MS", 24), background = "Black",
-                                        activebackground = "Black", borderwidth = 0, foreground = "White")
-        self.back_button = Button(self.root, text = "Retour", font = ("Comic Sans MS", 24), background = "Black",
-                                        activebackground = "Black", borderwidth = 0, foreground = "White", command = self._go_back)
+        self.difficulty_button = Button(self.root, text = "Difficultés", command = self._show_difficulties)
+        self.theme_button = Button(self.root, text = "Thèmes", command = self._show_themes)
+        self.event_button = Button(self.root, text = "Events")
+        self.back_button = Button(self.root, text = "Retour", command = self._go_back)
 
         self.difficulty_button.place(relx = 0.5, rely = 0.15, anchor = "center")
         self.theme_button.place(relx = 0.5, rely = 0.35, anchor = "center")
@@ -268,19 +267,19 @@ class Main():
 
     # The following 2 functions have been made using this tutorial: https://youtu.be/fGx8-RmaJbg
 
-    def _on_hover(self, event, used_font : tuple = ("Freestyle Script", 48) ) -> None:
+    def _on_hover(self, event, used_color : str, used_font : tuple = ("Freestyle Script", 48)) -> None:
         """
         Apply a small animation when the mouse hover a widget.
         """
-        event.widget["foreground"] = "#FF2828"
+        event.widget["foreground"] = used_color
         event.widget["font"] = used_font
         return None
     
-    def _on_default(self, event, used_font : tuple = ("Freestyle Script", 48)) -> None:
+    def _on_default(self, event, used_color : str, used_font : tuple = ("Freestyle Script", 48)) -> None:
         """
         Apply a small animation when the mouse is no longer hovering a widget.
         """
-        event.widget["foreground"] = "#E9FA2E"
+        event.widget["foreground"] = used_color
         event.widget["font"] = used_font
 
         return None
@@ -295,7 +294,6 @@ class Main():
         if self.current_menu[-1] == "Main_menu":
             self.comment_display.config(background = "#040444", foreground = "#B0A926", font = ("Papyrus", 32), wraplength = 1000)
 
-            ## Main Menu part
             self.start_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E", activeforeground = "#FF2828",
                                     font = ("Freestyle Script", 48), borderwidth = 0)
             self.setting_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E", activeforeground = "#FF2828",
@@ -304,16 +302,31 @@ class Main():
                                     font = ("Freestyle Script", 48), borderwidth = 0)
             
             # Used Chatgpt to make the lambda functions work.
-            self.start_button.bind('<Enter>', lambda e: self._on_hover(e, ("Freestyle Script", 52)))
-            self.start_button.bind('<Leave>', self._on_default)
-            self.setting_button.bind('<Enter>', lambda e: self._on_hover(e, ("Freestyle Script", 52)))
-            self.setting_button.bind('<Leave>', self._on_default)
-            self.quit_button.bind('<Enter>', lambda e: self._on_hover(e, ("Freestyle Script", 52)))
-            self.quit_button.bind('<Leave>', self._on_default)
+            self.start_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF2828", ("Freestyle Script", 52)))
+            self.start_button.bind('<Leave>', lambda e : self._on_default(e, "#E9FA2E"))
+            self.setting_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF2828", ("Freestyle Script", 52)))
+            self.setting_button.bind('<Leave>', lambda e : self._on_default(e, "#E9FA2E"))
+            self.quit_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF2828", ("Freestyle Script", 52)))
+            self.quit_button.bind('<Leave>', lambda e : self._on_default(e, "#E9FA2E"))
 
         elif self.current_menu[-1] == "Settings" :
-            ## Settings Menu Part
-            self.difficulty_button.config(background = "#040444", activebackground = "#040444", foreground = "#FFFFFF")
+            self.difficulty_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E",
+                                          activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+            self.theme_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E",
+                                          activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+            self.event_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E",
+                                          activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+            self.back_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E",
+                                          activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+            
+            self.difficulty_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Century Gothic", 28))))
+            self.difficulty_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Century Gothic", 24))))
+            self.theme_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Century Gothic", 28))))
+            self.theme_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Century Gothic", 24))))
+            self.event_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Century Gothic", 28))))
+            self.event_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Century Gothic", 24))))
+            self.back_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Century Gothic", 28))))
+            self.back_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Century Gothic", 24))))
 
         return None
 
