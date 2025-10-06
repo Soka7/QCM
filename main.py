@@ -33,16 +33,14 @@ def Home(ToggleEvents):
     Evts.grid(column=0, row=4)
     Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=lambda: Transit(ToggleEvents))
     Start.grid(column=0, row=3)
-    
-    ###################################################################### Cette partie est du troll et donc ne doit pas compter dans la note.
-    GS = PageBakaSombre()
+
+    GS = G_S()
     GrandSage = tk.Button(Frame, text="Grand Sage", bg = "Black", fg="Green", command=GS.CreerPage)
     GrandSage.grid(column=0, row=5)
     
     Page.mainloop()
-    
-########################################################################## Cette partie est du troll et donc ne doit pas compter dans la note.
-class PageBakaSombre():
+
+class G_S():
     def __init__(self):
         self.Frame_ = None
         self.image = None
@@ -75,7 +73,6 @@ class PageBakaSombre():
         self.image = ImageTk.PhotoImage(Image_)
         Img = tk.Label(self.Frame_, image=self.image, bg = "Black", fg="Green")
         Img.grid(column=0, row=4)
-#########################################################################################
     
 def Event():
     global Fini, NmPage
