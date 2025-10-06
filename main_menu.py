@@ -271,7 +271,7 @@ class Main():
 
     # The following 2 functions have been made using this tutorial: https://youtu.be/fGx8-RmaJbg
 
-    def _on_hover(self, event, used_color : str, used_font : tuple = ("Freestyle Script", 48)) -> None:
+    def _on_hover(self, event, used_color : str, used_font : tuple = ("Comic Sans Ms", 48)) -> None:
         """
         Apply a small animation when the mouse hover a widget.
         """
@@ -279,7 +279,7 @@ class Main():
         event.widget["font"] = used_font
         return None
     
-    def _on_default(self, event, used_color : str, used_font : tuple = ("Freestyle Script", 48)) -> None:
+    def _on_default(self, event, used_color : str, used_font : tuple = ("Comic Sans Ms", 48)) -> None:
         """
         Apply a small animation when the mouse is no longer hovering a widget.
         """
@@ -296,91 +296,91 @@ class Main():
         self.root.config(background = "#040444") # Color taken from "Qui veut gagner des millions"'s background.
 
         if self.current_menu[-1] == "Main_menu":
-            self.comment_display.config(background = "#040444", foreground = "#B0A926", font = ("Papyrus", 32), wraplength = 1000)
+            self.comment_display.config(background = "#040444", foreground = "#B0A926", font = ("Comic Sans Ms", 32), wraplength = 1000)
 
             self.start_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E", activeforeground = "#FF2828",
-                                    font = ("Freestyle Script", 48), borderwidth = 0)
+                                    font = ("Comic Sans Ms", 48), highlightthickness = 0, borderwidth = 0)
             self.setting_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E", activeforeground = "#FF2828",
-                                    font = ("Freestyle Script", 48), borderwidth = 0)
+                                    font = ("Comic Sans Ms", 48), highlightthickness = 0, borderwidth = 0)
             self.quit_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E", activeforeground = "#FF2828",
-                                    font = ("Freestyle Script", 48), borderwidth = 0)
+                                    font = ("Comic Sans Ms", 48), highlightthickness=0, borderwidth = 0)
             
             # Used Chatgpt to make the lambda functions work.
-            self.start_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF2828", ("Freestyle Script", 52)))
+            self.start_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF2828", ("Comic Sans Ms", 52)))
             self.start_button.bind('<Leave>', lambda e : self._on_default(e, "#E9FA2E"))
-            self.setting_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF2828", ("Freestyle Script", 52)))
+            self.setting_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF2828", ("Comic Sans Ms", 52)))
             self.setting_button.bind('<Leave>', lambda e : self._on_default(e, "#E9FA2E"))
-            self.quit_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF2828", ("Freestyle Script", 52)))
+            self.quit_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF2828", ("Comic Sans Ms", 52)))
             self.quit_button.bind('<Leave>', lambda e : self._on_default(e, "#E9FA2E"))
 
         elif self.current_menu[-1] == "Settings" :
             self.difficulty_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E",
-                                          activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+                                          activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             self.theme_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E",
-                                          activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+                                          activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             self.event_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E",
-                                          activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+                                          activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             self.back_button.config(background = "#040444", activebackground = "#040444", foreground = "#E9FA2E",
-                                          activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+                                          activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             
-            self.difficulty_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Century Gothic", 28))))
-            self.difficulty_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Century Gothic", 24))))
-            self.theme_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Century Gothic", 28))))
-            self.theme_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Century Gothic", 24))))
-            self.event_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Century Gothic", 28))))
-            self.event_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Century Gothic", 24))))
-            self.back_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Century Gothic", 28))))
-            self.back_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Century Gothic", 24))))
+            self.difficulty_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Comic Sans Ms", 28))))
+            self.difficulty_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Comic Sans Ms", 24))))
+            self.theme_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Comic Sans Ms", 28))))
+            self.theme_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Comic Sans Ms", 24))))
+            self.event_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Comic Sans Ms", 28))))
+            self.event_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Comic Sans Ms", 24))))
+            self.back_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", (("Comic Sans Ms", 28))))
+            self.back_button.bind('<Leave>', lambda e: self._on_default(e, "#E9FA2E", (("Comic Sans Ms", 24))))
         
         elif self.current_menu[-1] == "Difficulties":
             self.easy_button.config(background = "#040444", activebackground = "#040444", foreground = "#28DF1F",
-                                    activeforeground = "#FF1616", font = ("Constantia", 24), borderwidth = 0)
+                                    activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             self.normal_button.config(background = "#040444", activebackground = "#040444", foreground = "#372BBC",
-                                    activeforeground = "#FF1616", font = ("Constantia", 24), borderwidth = 0)
+                                    activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             self.hard_button.config(background = "#040444", activebackground = "#040444", foreground = "#B31212",
-                                    activeforeground = "#FF1616", font = ("Constantia", 24), borderwidth = 0)
+                                    activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             self.lunatic_button.config(background = "#040444", activebackground = "#040444", foreground = "#FF00A6",
-                                    activeforeground = "#FF1616", font = ("Constantia", 24), borderwidth = 0)
+                                    activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             self.all_button.config(background = "#040444", activebackground = "#040444", foreground = "#00DDFF",
-                                    activeforeground = "#FF1616", font = ("Constantia", 24), borderwidth = 0)
+                                    activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
 
-            self.easy_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Constantia", 28)))
-            self.easy_button.bind('<Leave>', lambda e: self._on_default(e, "#28DF1F", ("Constantia", 24)))
-            self.normal_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Constantia", 28)))
-            self.normal_button.bind('<Leave>', lambda e: self._on_default(e, "#372BBC", ("Constantia", 24)))
-            self.hard_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Constantia", 28)))
-            self.hard_button.bind('<Leave>', lambda e: self._on_default(e, "#B31212", ("Constantia", 24)))
-            self.lunatic_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Constantia", 28)))
-            self.lunatic_button.bind('<Leave>', lambda e: self._on_default(e, "#FF00A6", ("Constantia", 24)))
-            self.all_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Constantia", 28)))
-            self.all_button.bind('<Leave>', lambda e: self._on_default(e, "#00DDFF", ("Constantia", 24)))
+            self.easy_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Comic Sans Ms", 28)))
+            self.easy_button.bind('<Leave>', lambda e: self._on_default(e, "#28DF1F", ("Comic Sans Ms", 24)))
+            self.normal_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Comic Sans Ms", 28)))
+            self.normal_button.bind('<Leave>', lambda e: self._on_default(e, "#372BBC", ("Comic Sans Ms", 24)))
+            self.hard_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Comic Sans Ms", 28)))
+            self.hard_button.bind('<Leave>', lambda e: self._on_default(e, "#B31212", ("Comic Sans Ms", 24)))
+            self.lunatic_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Comic Sans Ms", 28)))
+            self.lunatic_button.bind('<Leave>', lambda e: self._on_default(e, "#FF00A6", ("Comic Sans Ms", 24)))
+            self.all_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Comic Sans Ms", 28)))
+            self.all_button.bind('<Leave>', lambda e: self._on_default(e, "#00DDFF", ("Comic Sans Ms", 24)))
 
         elif self.current_menu[-1] == "Themes":
             self.fun_button.config(background = "#040444", activebackground = "#040444", foreground = "#00FF00",
-                                    activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+                                    activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             self.maths_button.config(background = "#040444", activebackground = "#040444", foreground = "#C55B5B",
-                                    activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+                                    activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             self.geography_button.config(background = "#040444", activebackground = "#040444", foreground = "#18D8FF",
-                                    activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+                                    activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             self.history_button.config(background = "#040444", activebackground = "#040444", foreground = "#BEBB22",
-                                    activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+                                    activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             self.video_games_button.config(background = "#040444", activebackground = "#040444", foreground = "#5A13DF",
-                                    activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+                                    activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             self.general_culture_button.config(background = "#040444", activebackground = "#040444", foreground = "#E92FC7",
-                                    activeforeground = "#FF1616", font = ("Century Gothic", 24), borderwidth = 0)
+                                    activeforeground = "#FF1616", font = ("Comic Sans Ms", 24), highlightthickness = 0, borderwidth = 0)
             
-            self.fun_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Century Gothic", 28)))
-            self.fun_button.bind('<Leave>', lambda e: self._on_default(e, "#00FF00", ("Century Gothic", 24)))
-            self.maths_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Century Gothic", 28)))
-            self.maths_button.bind('<Leave>', lambda e: self._on_default(e, "#C55B5B", ("Century Gothic", 24)))
-            self.geography_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Century Gothic", 28)))
-            self.geography_button.bind('<Leave>', lambda e: self._on_default(e, "#18D8FF", ("Century Gothic", 24)))
-            self.history_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Century Gothic", 28)))
-            self.history_button.bind('<Leave>', lambda e: self._on_default(e, "#BEBB22", ("Century Gothic", 24)))
-            self.video_games_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Century Gothic", 28)))
-            self.video_games_button.bind('<Leave>', lambda e: self._on_default(e, "#5A13DF", ("Century Gothic", 24)))
-            self.general_culture_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Century Gothic", 28)))
-            self.general_culture_button.bind('<Leave>', lambda e: self._on_default(e, "#E92FC7", ("Century Gothic", 24)))
+            self.fun_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Comic Sans Ms", 28)))
+            self.fun_button.bind('<Leave>', lambda e: self._on_default(e, "#00FF00", ("Comic Sans Ms", 24)))
+            self.maths_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Comic Sans Ms", 28)))
+            self.maths_button.bind('<Leave>', lambda e: self._on_default(e, "#C55B5B", ("CComic Sans Ms", 24)))
+            self.geography_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Comic Sans Ms", 28)))
+            self.geography_button.bind('<Leave>', lambda e: self._on_default(e, "#18D8FF", ("Comic Sans Ms", 24)))
+            self.history_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Comic Sans Ms", 28)))
+            self.history_button.bind('<Leave>', lambda e: self._on_default(e, "#BEBB22", ("Comic Sans Ms", 24)))
+            self.video_games_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Comic Sans Ms", 28)))
+            self.video_games_button.bind('<Leave>', lambda e: self._on_default(e, "#5A13DF", ("Comic Sans Ms", 24)))
+            self.general_culture_button.bind('<Enter>', lambda e: self._on_hover(e, "#FF1616", ("Comic Sans Ms", 28)))
+            self.general_culture_button.bind('<Leave>', lambda e: self._on_default(e, "#E92FC7", ("Comic Sans Ms", 24)))
 
         return None
 
@@ -396,3 +396,5 @@ class Main():
     
 app = Main()
 app.start_game()
+
+# Works well on Windows 11 but not on Linux
