@@ -33,16 +33,14 @@ def Home(ToggleEvents):
     Evts.grid(column=0, row=4)
     Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=lambda: Transit(ToggleEvents))
     Start.grid(column=0, row=3)
-    
-    ###################################################################### Cette partie est du troll et donc ne doit pas compter dans la note.
-    GS = PageBakaSombre()
+
+    GS = G_S()
     GrandSage = tk.Button(Frame, text="Grand Sage", bg = "Black", fg="Green", command=GS.CreerPage)
     GrandSage.grid(column=0, row=5)
     
     Page.mainloop()
-    
-########################################################################## Cette partie est du troll et donc ne doit pas compter dans la note.
-class PageBakaSombre():
+
+class G_S():
     def __init__(self):
         self.Frame_ = None
         self.image = None
@@ -75,7 +73,6 @@ class PageBakaSombre():
         self.image = ImageTk.PhotoImage(Image_)
         Img = tk.Label(self.Frame_, image=self.image, bg = "Black", fg="Green")
         Img.grid(column=0, row=4)
-#########################################################################################
     
 def Event():
     global Fini, NmPage
@@ -111,7 +108,8 @@ def CallPage(NmPage, NumEvent, BonnesReponses):
         if ToggleEvents == True:
             Event()
     if NmPage == len(BonnesReponses):
-        Score()
+        Score1 = Score()
+        Score1.LancerPage()
     else:
         #display_q(NmPage)[0] Question
         #display_q(NmPage)[1] Choix
@@ -159,41 +157,54 @@ class CreerPageCustom:
         Pag.destroy()
         CallPage(NmPage, self.NumEvent, BonnesReponses) #Ici on a de la recursivité.
     
-def Score():
-    Score_ = 0
-    if Bonus == 1:
-        Score_ += 1
-    for Rep_ in range(len(Reponses)):
-        if Reponses[Rep_] == BonnesReponses[Rep_]:
+class Score:
+    def __init__(self):
+        self.ImgRef = None
+        self.page = None
+        self.Frame = None
+        
+    def LancerPage(self):
+        Score_ = 0
+        if Bonus == 1:
             Score_ += 1
-    global Pag_
-    Pag_ = tk.Tk()
-    Fram_ = tk.Frame(Pag_, bd = 5, relief = "ridge", bg = "Black")
-    Fram_.grid(padx=10, pady=10)
-    
-    Titr_ = tk.Label(Fram_, text=f"Votre score ! : {Score_}   ||  Et la correction: {BonnesReponses}", bg = "Black", fg="Red")
-    Titr_.grid(column=0, row=0)
+        for Rep_ in range(len(Reponses)):
+            if Reponses[Rep_] == BonnesReponses[Rep_]:
+                Score_ += 1
 
-    if Score_/len(BonnesReponses) <= 0.1:
-        comment = "\n Vous etes lamentable, insecte. "
+        self.page = tk.Tk()
+        self.Frame = tk.Frame(self.page, bd = 5, relief = "ridge", bg = "Black")
+        self.Frame.grid(padx=10, pady=10)
+        
+        Titr_ = tk.Label(self.Frame, text=f"Votre score ! : {Score_}   ||  Et la correction: {BonnesReponses}", bg = "Black", fg="Red")
+        Titr_.grid(column=0, row=0)
 
-    elif Score_/len(BonnesReponses) < 0.5:
-        comment = "\n Vous etes faible, miserable etre humain. "
+        if Score_/len(BonnesReponses) <= 0.1:
+            comment = "\n Vous etes lamentable, insecte. "
 
-    elif Score_/len(BonnesReponses) < 0.7:
-        comment = "\n Vous avez eu un score passable. "
-    elif Score_/len(BonnesReponses) < 1:
-        comment = "\n Vous avez eu un score remarquable ! "
-    else:
-        comment = "\n Vous avez eu un score parfait, Chuck Norris est tres fier de vous. Good boy."
+        elif Score_/len(BonnesReponses) < 0.5:
+            comment = "\n Vous etes faible, miserable etre humain. "
+
+        elif Score_/len(BonnesReponses) < 0.7:
+            comment = "\n Vous avez eu un score passable. "
+        elif Score_/len(BonnesReponses) < 1:
+            comment = "\n Vous avez eu un score remarquable ! "
+        else:
+            comment = "\n Vous avez eu un score parfait, Chuck Norris est tres fier de vous. Good boy."
+        
+        Comm = tk.Label(self.Frame, text=comment, bg = "Black", fg="Red")
+        Comm.grid(column=0, row=1)
+        
+        Image_Man = Image.open("Man.jpg")
+        Image_Man = Image_Man.resize((800, 800))
+        self.ImgRef = ImageTk.PhotoImage(Image_Man)
+        Img = tk.Label(self.Frame, image=self.ImgRef, bg = "Black", fg="Green")
+        Img.grid(column=0, row=4)
+        
+        Rejouer = tk.Button(self.Frame, text="Rejouer ?", bg = "Black", fg="Green", command=self.Rej)
+        Rejouer.grid(column=0, row=2)
     
-    Comm = tk.Label(Fram_, text=comment, bg = "Black", fg="Red")
-    Comm.grid(column=0, row=1)
-    
-    def Rej():
-        Pag_.destroy()
+    def Rej(self):
+        self.page.destroy()
         Transit(ToggleEvents)
-    
-    Rejouer = tk.Button(Fram_, text="Rejouer ?", bg = "Black", fg="Green", command=Rej)
-    Rejouer.grid(column=0, row=2)
+
 Home(ToggleEvents)
