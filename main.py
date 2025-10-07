@@ -3,10 +3,8 @@ from tkinter import ttk, messagebox
 from tkinter import Tk, Label
 import random
 from PIL import Image, ImageTk
-from Extracted_QNA import correct_answer_list
+from Extracted_QNA import RecupCorr
 from question_displayer import display_q
-
-print(correct_answer_list)
 
 ToggleEvents = False
 def Toggle():
@@ -21,7 +19,7 @@ def Home(ToggleEvents):
     Frame = tk.Frame(Page, bd = 5, relief = "ridge", bg = "Black")
     Frame.grid(padx=10, pady=10)
     
-    Titre = tk.Label(Frame, text="LE QCM SUR CHUCK NORRIS (LE GOAT).", bg = "White", fg="Red")
+    Titre = tk.Label(Frame, text="LE QCM SUR CHUCK NORRIS (LE GOAT) et d autres trucs.", bg = "White", fg="Red")
     Titre.grid(column=0, row=0)
     Welcome = tk.Label(Frame, text="Bonjour chers admirateurs du grand CHUCK NORRIS.", bg = "Black", fg="Green")
     Welcome.grid(column=0, row=1)
@@ -31,6 +29,17 @@ def Home(ToggleEvents):
     Destroyed = 0
     Evts = tk.Button(Frame, text="Toggle Events", bg = "Black", fg="Green", command=Toggle)
     Evts.grid(column=0, row=4)
+    Diff = tk.Entry(Frame, bg = "Black", fg="Green")
+    Diff.grid(column=0, row=6)
+    global NmPage
+    NmPage = 0
+    def GetEntree(Entree):
+        return(int(Entree.get()))
+    def GetDiff():
+        global NmPage
+        NmPage = GetEntree(Diff)
+    DiffLabel = tk.Button(Frame,text="Difficulte +Haut -> +Plus facile ^", bg = "Black", fg="Green", command=GetDiff)
+    DiffLabel.grid(column=0, row=7)
     Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=lambda: Transit(ToggleEvents))
     Start.grid(column=0, row=3)
 
@@ -92,14 +101,14 @@ def Event():
         NmPage = None
     
 def Transit(ToggleEvents):
-    global Fini, BonnesReponses, Reponses, NmPage, Destroyed
+    global Fini, BonnesReponses, Reponses, Destroyed, NmPage
     NumEvent = random.randint(-5,10)
     if Destroyed == 0:
         Page.destroy()
     Destroyed = 1
-    BonnesReponses = correct_answer_list
     Reponses = []
-    NmPage = 0
+    NmPage = 2*NmPage
+    BonnesReponses = RecupCorr(NmPage)
     CallPage(NmPage, NumEvent, BonnesReponses)
                 
 def CallPage(NmPage, NumEvent, BonnesReponses):
