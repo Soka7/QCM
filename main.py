@@ -5,11 +5,13 @@ import random
 from PIL import Image, ImageTk
 from Extracted_QNA import RecupCorr, RecupCorrComp
 from question_displayer import display_q
+from BttnAesthetics import _on_hover, _on_default
 
 ToggleEvents = False
-def Toggle():
+def Toggle(Bttn):
     global ToggleEvents
     ToggleEvents = True
+    Bttn.config(bg = "White")
 
 def Home(ToggleEvents):
     global Bonus
@@ -27,7 +29,7 @@ def Home(ToggleEvents):
     Presentation.grid(column=0, row=2)
     global Destroyed
     Destroyed = 0
-    Evts = tk.Button(Frame, text="Toggle Events", bg = "Black", fg="Green", command=Toggle)
+    Evts = tk.Button(Frame, text="Toggle Events", bg = "Black", fg="Green", command=lambda:Toggle(Evts))
     Evts.grid(column=0, row=4)
     Diff = tk.Entry(Frame, bg = "Black", fg="Green")
     Diff.grid(column=0, row=6)
@@ -38,10 +40,13 @@ def Home(ToggleEvents):
     def GetDiff():
         global NmPage
         NmPage = GetEntree(Diff)
+        DiffLabel.config(bg = "White")
     DiffLabel = tk.Button(Frame,text="Difficulte +Haut -> +Plus facile ^", bg = "Black", fg="Green", command=GetDiff)
     DiffLabel.grid(column=0, row=7)
     Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=lambda: Transit(ToggleEvents))
     Start.grid(column=0, row=3)
+    Start.bind('<Enter>', lambda e: _on_hover(e, "#040444", ("Comic Sans Ms", 28)))
+    Start.bind('<Leave>', lambda e: _on_default(e, "#A6FF00", ("Comic Sans Ms", 16)))
 
     GS = G_S()
     GrandSage = tk.Button(Frame, text="Grand Sage", bg = "Black", fg="Green", command=GS.CreerPage)
