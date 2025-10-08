@@ -3,7 +3,7 @@ from tkinter import ttk, messagebox
 from tkinter import Tk, Label
 import random
 from PIL import Image, ImageTk
-from Extracted_QNA import RecupCorr
+from Extracted_QNA import RecupCorr, RecupCorrComp
 from question_displayer import display_q
 
 ToggleEvents = False
@@ -116,7 +116,7 @@ def CallPage(NmPage, NumEvent, BonnesReponses):
     if NumEvent == NmPage:
         if ToggleEvents == True:
             Event()
-    if NmPage == len(BonnesReponses):
+    if NmPage == len(RecupCorrComp()):
         Score1 = Score()
         Score1.LancerPage()
     else:
