@@ -204,7 +204,7 @@ class Score:
         Comm.grid(column=0, row=1)
         
         Image_Man = Image.open("Man.jpg")
-        Image_Man = Image_Man.resize((800, 800))
+        Image_Man = Image_Man.resize((400, 400))
         self.ImgRef = ImageTk.PhotoImage(Image_Man)
         Img = tk.Label(self.Frame, image=self.ImgRef, bg = "Black", fg="Green")
         Img.grid(column=0, row=4)
