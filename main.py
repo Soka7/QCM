@@ -3,15 +3,15 @@ from tkinter import ttk, messagebox
 from tkinter import Tk, Label
 import random
 from PIL import Image, ImageTk
-from Extracted_QNA import correct_answer_list
+from Extracted_QNA import RecupCorr, RecupCorrComp
 from question_displayer import display_q
-
-print(correct_answer_list)
+from BttnAesthetics import _on_hover, _on_default
 
 ToggleEvents = False
-def Toggle():
+def Toggle(Bttn):
     global ToggleEvents
     ToggleEvents = True
+    Bttn.config(bg = "White")
 
 def Home(ToggleEvents):
     global Bonus
@@ -21,7 +21,7 @@ def Home(ToggleEvents):
     Frame = tk.Frame(Page, bd = 5, relief = "ridge", bg = "Black")
     Frame.grid(padx=10, pady=10)
     
-    Titre = tk.Label(Frame, text="LE QCM SUR CHUCK NORRIS (LE GOAT).", bg = "White", fg="Red")
+    Titre = tk.Label(Frame, text="LE QCM SUR CHUCK NORRIS (LE GOAT) et d autres trucs.", bg = "White", fg="Red")
     Titre.grid(column=0, row=0)
     Welcome = tk.Label(Frame, text="Bonjour chers admirateurs du grand CHUCK NORRIS.", bg = "Black", fg="Green")
     Welcome.grid(column=0, row=1)
@@ -29,10 +29,24 @@ def Home(ToggleEvents):
     Presentation.grid(column=0, row=2)
     global Destroyed
     Destroyed = 0
-    Evts = tk.Button(Frame, text="Toggle Events", bg = "Black", fg="Green", command=Toggle)
+    Evts = tk.Button(Frame, text="Toggle Events", bg = "Black", fg="Green", command=lambda:Toggle(Evts))
     Evts.grid(column=0, row=4)
+    Diff = tk.Entry(Frame, bg = "Black", fg="Green")
+    Diff.grid(column=0, row=6)
+    global NmPage
+    NmPage = 0
+    def GetEntree(Entree):
+        return(int(Entree.get()))
+    def GetDiff():
+        global NmPage
+        NmPage = GetEntree(Diff)
+        DiffLabel.config(bg = "White")
+    DiffLabel = tk.Button(Frame,text="Difficulte +Haut -> +Plus facile ^", bg = "Black", fg="Green", command=GetDiff)
+    DiffLabel.grid(column=0, row=7)
     Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=lambda: Transit(ToggleEvents))
     Start.grid(column=0, row=3)
+    Start.bind('<Enter>', lambda e: _on_hover(e, "#040444", ("Comic Sans Ms", 28)))
+    Start.bind('<Leave>', lambda e: _on_default(e, "#A6FF00", ("Comic Sans Ms", 16)))
 
     GS = G_S()
     GrandSage = tk.Button(Frame, text="Grand Sage", bg = "Black", fg="Green", command=GS.CreerPage)
@@ -92,14 +106,14 @@ def Event():
         NmPage = None
     
 def Transit(ToggleEvents):
-    global Fini, BonnesReponses, Reponses, NmPage, Destroyed
+    global Fini, BonnesReponses, Reponses, Destroyed, NmPage
     NumEvent = random.randint(-5,10)
     if Destroyed == 0:
         Page.destroy()
     Destroyed = 1
-    BonnesReponses = correct_answer_list
     Reponses = []
-    NmPage = 0
+    NmPage = 2*NmPage
+    BonnesReponses = RecupCorr(NmPage)
     CallPage(NmPage, NumEvent, BonnesReponses)
                 
 def CallPage(NmPage, NumEvent, BonnesReponses):
@@ -107,7 +121,7 @@ def CallPage(NmPage, NumEvent, BonnesReponses):
     if NumEvent == NmPage:
         if ToggleEvents == True:
             Event()
-    if NmPage == len(BonnesReponses):
+    if NmPage == len(RecupCorrComp()):
         Score1 = Score()
         Score1.LancerPage()
     else:
@@ -195,7 +209,7 @@ class Score:
         Comm.grid(column=0, row=1)
         
         Image_Man = Image.open("Man.jpg")
-        Image_Man = Image_Man.resize((800, 800))
+        Image_Man = Image_Man.resize((400, 400))
         self.ImgRef = ImageTk.PhotoImage(Image_Man)
         Img = tk.Label(self.Frame, image=self.ImgRef, bg = "Black", fg="Green")
         Img.grid(column=0, row=4)
