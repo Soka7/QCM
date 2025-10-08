@@ -43,7 +43,7 @@ def Home(ToggleEvents):
         DiffLabel.config(bg = "White")
     DiffLabel = tk.Button(Frame,text="Difficulte +Haut -> +Plus facile ^", bg = "Black", fg="Green", command=GetDiff)
     DiffLabel.grid(column=0, row=7)
-    Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=lambda: Transit(ToggleEvents))
+    Start = tk.Button(Frame, text="Prets ?", bg = "Black", fg="Green", command=lambda: Transit(ToggleEvents, 0))
     Start.grid(column=0, row=3)
     Start.bind('<Enter>', lambda e: _on_hover(e, "#040444", ("Comic Sans Ms", 28)))
     Start.bind('<Leave>', lambda e: _on_default(e, "#A6FF00", ("Comic Sans Ms", 16)))
@@ -105,14 +105,17 @@ def Event():
         Fini = True
         NmPage = None
     
-def Transit(ToggleEvents):
+def Transit(ToggleEvents, NombreRej):
     global Fini, BonnesReponses, Reponses, Destroyed, NmPage
     NumEvent = random.randint(-5,10)
     if Destroyed == 0:
         Page.destroy()
     Destroyed = 1
     Reponses = []
-    NmPage = 2*NmPage
+    if NombreRej == 0:
+        NmPage = 2*NmPage
+    else:
+        NmPage = 0
     BonnesReponses = RecupCorr(NmPage)
     CallPage(NmPage, NumEvent, BonnesReponses)
                 
@@ -219,6 +222,6 @@ class Score:
     
     def Rej(self):
         self.page.destroy()
-        Transit(ToggleEvents)
+        Transit(ToggleEvents, 1)
 
 Home(ToggleEvents)
