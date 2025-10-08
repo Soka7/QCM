@@ -15,7 +15,6 @@ Un QCM
 - **Affichage correction**
 - **Modulariser**
 - **Requirements**
-- **Tests unitaires**
 
 ![Hum](Hikari-gif.webp)
 
